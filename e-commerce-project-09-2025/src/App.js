@@ -3,6 +3,7 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { createContext, lazy, Suspense, useEffect, useState } from "react";
 import Loader from "./components/Loader";
 import { ToastContainer } from "react-toastify";
+import Header from "./components/Header";
 
 export const AdminLoginContext = createContext();
 
@@ -35,6 +36,7 @@ function App() {
         theme="colored"
       />
       <BrowserRouter>
+      <Header/>
         <AdminLoginContext.Provider value={{ adminLogin, setAdminLogin }}>
           <Routes>
             <Route

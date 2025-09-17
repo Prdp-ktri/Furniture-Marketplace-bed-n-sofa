@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import './AdminLoginCredentials.css';
 
 function AdminLoginCredentials() {
-  const {setAdminLogin} = useContext(AdminLoginContext)
+  const {setAdminLogin} = useContext(AdminLoginContext);
   const [email, setEmail] = useState("");
   const [pw, setPw] = useState("");
   const [data, setData] = useState([]);

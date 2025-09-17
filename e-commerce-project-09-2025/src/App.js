@@ -1,9 +1,9 @@
 import "./App.css";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { createContext, lazy, Suspense, useEffect, useState } from "react";
-import Loader from "./components/Loader";
+import Loader from "./components/admin/Loader";
 import { ToastContainer } from "react-toastify";
-import Header from "./components/Header";
+import Header from "./components/admin/Header";
 
 export const AdminLoginContext = createContext();
 
@@ -36,11 +36,11 @@ function App() {
         theme="colored"
       />
       <BrowserRouter>
-      <Header/>
         <AdminLoginContext.Provider value={{ adminLogin, setAdminLogin }}>
+          {adminLogin && <Header />}
           <Routes>
             <Route
-              path="/adminlogin"
+              path="/"
               element={
                 <Suspense fallback={<Loader />}>
                   <AdminLoginCredentials />
@@ -51,11 +51,7 @@ function App() {
               path="/adminDashboard"
               element={
                 <Suspense fallback={<Loader />}>
-                  {adminLogin ? (
-                    <AdminDashboard />
-                  ) : (
-                    <Navigate to="/adminLogin" />
-                  )}
+                  {adminLogin ? <AdminDashboard /> : <Navigate to="/" />}
                 </Suspense>
               }
             />

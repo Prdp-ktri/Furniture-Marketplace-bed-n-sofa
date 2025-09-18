@@ -1,0 +1,25 @@
+{
+  "products": [
+    {
+      "productName": "Mattress",
+      "desc": "fdgsd",
+      "id": "c04a"
+    },
+    {
+      "id": "4a72",
+      "productName": "Queen Size Luxurious Bed",
+      "brandName": "Pepperfry",
+      "productCat": "Bed",
+      "productDesc": "Upgrade your bedroom with the timeless elegance of a Pepperfry Queen Size Bed, crafted to bring you the perfect balance of comfort, functionality, and design. Built with high-quality engineered wood and a sturdy frame, this bed ensures long-lasting durability while maintaining a sleek and modern aesthetic.\n\nWith its queen size dimensions, it provides ample space for a restful night’s sleep without overwhelming your bedroom. The thoughtfully designed structure offers excellent back support, making it suitable for everyday use.",
+      "productImgs": [
+        {},
+        {},
+        {},
+        {},
+        {}
+      ],
+      "productSize": "queen",
+      "mrp": "71999"
+    }
+  ]
+}

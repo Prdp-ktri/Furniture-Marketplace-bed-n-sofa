@@ -7,15 +7,14 @@ import Header from "./components/admin/Header";
 import BuyerCreation from "./modules/buyer/BuyerCreation";
 import SellerCreation from "./modules/seller/SellerCreation";
 import LoginPortal from "./modules/login/LoginPortal";
+import AddProduct from "./components/admin/AddProduct";
 
 export const AdminLoginContext = createContext();
 export const BuyerLoginContext = createContext();
 export const SellerLoginContext = createContext();
 export const LoginContext = createContext();
 
-const LoginCredentials = lazy(() => 
-  import("./modules/login/LoginCredentials")
-);
+const LoginCredentials = lazy(() => import("./modules/login/LoginCredentials"));
 const LoginDashboard = lazy(() => import("./modules/login/LoginPortal"));
 
 const AdminLoginCredentials = lazy(() =>
@@ -71,102 +70,108 @@ function App() {
         pauseOnHover
         theme="colored"
       />
+
       <BrowserRouter>
         <LoginContext.Provider value={{ login, setLogin }}>
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <Suspense fallback={<Loader />}>
-                  <LoginPortal />
-                </Suspense>
-              }
-            />
-          </Routes>
+          <AdminLoginContext.Provider value={{ adminLogin, setAdminLogin }}>
+            <BuyerLoginContext.Provider value={{ buyerLogin, setBuyerLogin }}>
+              <SellerLoginContext.Provider
+                value={{ sellerLogin, setSellerLogin }}
+              >
+                {adminLogin && <Header />}
+                <Routes>
+                  {/* General */}
+                  <Route
+                    path="/"
+                    element={
+                      <Suspense fallback={<Loader />}>
+                        <LoginPortal />
+                      </Suspense>
+                    }
+                  />
+
+                  {/* Admin */}
+                  <Route
+                    path="/adminLogin"
+                    element={
+                      <Suspense fallback={<Loader />}>
+                        <AdminLoginCredentials />
+                      </Suspense>
+                    }
+                  />
+                  <Route
+                    path="/adminDashboard"
+                    element={
+                      <Suspense fallback={<Loader />}>
+                        {adminLogin ? <AdminDashboard /> : <Navigate to="/" />}
+                      </Suspense>
+                    }
+                  />
+                  <Route
+                    path="/add"
+                    element={
+                      <Suspense fallback={<Loader/>}>
+                        <AddProduct/>
+                      </Suspense>
+                    }
+                  />
+
+                  {/* Buyer */}
+                  <Route
+                    path="/buyerCreation"
+                    element={
+                      <Suspense fallback={<Loader />}>
+                        <BuyerCreation />
+                      </Suspense>
+                    }
+                  />
+                  <Route
+                    path="/buyerLogin"
+                    element={
+                      <Suspense fallback={<Loader />}>
+                        <BuyerLoginCredentials />
+                      </Suspense>
+                    }
+                  />
+                  <Route
+                    path="/buyerDashboard"
+                    element={
+                      <Suspense fallback={<Loader />}>
+                        <BuyerDashboard />
+                      </Suspense>
+                    }
+                  />
+
+                  {/* Seller */}
+                  <Route
+                    path="/sellerCreation"
+                    element={
+                      <Suspense fallback={<Loader />}>
+                        <SellerCreation />
+                      </Suspense>
+                    }
+                  />
+                  <Route
+                    path="/sellerLogin"
+                    element={
+                      <Suspense fallback={<Loader />}>
+                        <SellerLoginCredentials />
+                      </Suspense>
+                    }
+                  />
+                  <Route
+                    path="/sellerDashboard"
+                    element={
+                      <Suspense fallback={<Loader />}>
+                        <SellerDashboard />
+                      </Suspense>
+                    }
+                  />
+                </Routes>
+              </SellerLoginContext.Provider>
+            </BuyerLoginContext.Provider>
+          </AdminLoginContext.Provider>
         </LoginContext.Provider>
-      </BrowserRouter>
-      <BrowserRouter>
-        <AdminLoginContext.Provider value={{ adminLogin, setAdminLogin }}>
-          {adminLogin && <Header />}
-          <Routes>
-            <Route
-              path="/admin"
-              element={<Suspense fallback={<Loader />}></Suspense>}
-            />
-            <Route
-              path="/adminLogin"
-              element={
-                <Suspense fallback={<Loader />}>
-                  <AdminLoginCredentials />
-                </Suspense>
-              }
-            />
-            <Route
-              path="/adminDashboard"
-              element={
-                <Suspense fallback={<Loader />}>
-                  {adminLogin ? <AdminDashboard /> : <Navigate to="/" />}
-                </Suspense>
-              }
-            />
-          </Routes>
-        </AdminLoginContext.Provider>
-        <BuyerLoginContext.Provider value={{ buyerLogin, setBuyerLogin }}>
-          <Routes>
-            <Route
-              path="/buyerCreation"
-              element={
-                <Suspense fallback={<Loader />}>
-                  <BuyerCreation />
-                </Suspense>
-              }
-            />
-            <Route
-              path="/buyerLogin"
-              element={
-                <Suspense fallback={<Loader />}>
-                  <BuyerLoginCredentials />
-                </Suspense>
-              }
-            />
-            <Route
-              path="/buyerDashboard"
-              element={
-                <Suspense fallback={<Loader />}>
-                  <BuyerDashboard />
-                </Suspense>
-              }
-            />
-          </Routes>
-        </BuyerLoginContext.Provider>
-        <SellerLoginContext.Provider value={{ sellerLogin, setSellerLogin }}>
-          <Routes>
-            <Route
-              path="/sellerCreation"
-              element={
-                <Suspense fallback={<Loader />}>
-                  <SellerCreation />
-                </Suspense>
-              }
-            />
-            <Route
-              path="/sellerLogin"
-              element={
-                <Suspense fallback={<Loader />}>
-                  <SellerLoginCredentials />
-                </Suspense>
-              }
-            />
-            <Route
-              path="/sellerDashboards"
-              element={
-                <Suspense fallback={<Loader />}>
-                  <SellerDashboard />
-                </Suspense>
-              }
-            />
-          </Routes>
-        </SellerLoginContext.Provider>
       </BrowserRouter>
     </div>
   );

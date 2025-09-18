@@ -1,13 +1,13 @@
 import { Menu, X } from "lucide-react";
 import React, { useContext, useState } from "react";
 import { AdminLoginContext } from "../../App";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Header() {
   const [isProductsOpen, setProductsOpen] = useState(false);
   const [isProfilesOpen, setProfilesOpen] = useState(false);
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { adminLogin, setAdminLogin } = useContext(AdminLoginContext);
+  const { setAdminLogin } = useContext(AdminLoginContext);
   const navigate = useNavigate();
 
   const handleLogOut = () => {
@@ -36,13 +36,13 @@ function Header() {
             {isProductsOpen && (
               <ul className="absolute bg-white text-gray-800 mt-2 rounded-lg shadow-lg w-44 animate-fade-in">
                 <li className="px-4 py-2 hover:bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% cursor-pointer">
-                  Add Product
+                  <Link to={"/add"}>Add Product</Link>
                 </li>
                 <li className="px-4 py-2 hover:bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% cursor-pointer">
-                  Manage Products
+                  <Link to={"/manage"}>Manage Products</Link>
                 </li>
                 <li className="px-4 py-2 hover:bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% cursor-pointer">
-                  View Products
+                  <Link to={'/view'}>View Products</Link>
                 </li>
               </ul>
             )}

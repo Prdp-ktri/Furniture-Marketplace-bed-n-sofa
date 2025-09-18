@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { BuyerLoginContext } from "../../App";
@@ -28,13 +28,16 @@ export default function BuyerLoginCredentials() {
       setBuyerLogin(true);
       navigate("/buyersDashboard");
     } else {
-      toast("Invalid Buyer Login Credentials, Try Again");
+      toast("Invalid Buyer Login Credentials, Try Again!");
     }
   };
 
   return (
     <div>
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-yellow-400 to-orange-400 py-12 px-4" style={{width: "100vw", height: "100vh"}}>
+      <div
+        className="min-h-screen flex items-center justify-center bg-gradient-to-br from-yellow-400 to-orange-400 py-12 px-4"
+        style={{ width: "100vw", height: "100vh" }}
+      >
         <div className="max-w-md w-full bg-white/70 backdrop-blur-md rounded-2xl shadow-2xl p-8 border border-yellow-100">
           <h2 className="text-2xl sm:text-3xl font-semibold text-gray-800 text-center mb-6">
             Buyer Login

@@ -6,10 +6,17 @@ import { ToastContainer } from "react-toastify";
 import Header from "./components/admin/Header";
 import BuyerCreation from "./modules/buyer/BuyerCreation";
 import SellerCreation from "./modules/seller/SellerCreation";
+import LoginPortal from "./modules/login/LoginPortal";
 
 export const AdminLoginContext = createContext();
 export const BuyerLoginContext = createContext();
 export const SellerLoginContext = createContext();
+export const LoginContext = createContext();
+
+const LoginCredentials = lazy(() => 
+  import("./modules/login/LoginCredentials")
+);
+const LoginDashboard = lazy(() => import("./modules/login/LoginPortal"));
 
 const AdminLoginCredentials = lazy(() =>
   import("./modules/admin/AdminLoginCredentials")
@@ -23,10 +30,14 @@ const BuyerDashboard = lazy(() => import("./modules/buyer/BuyerDashboard"));
 
 const SellerLoginCredentials = lazy(() =>
   import("./modules/seller/SellerLoginCredentials")
-)
-const SellerDashboard = lazy(()=> import("./modules/seller/SellerDashboard"));
+);
+const SellerDashboard = lazy(() => import("./modules/seller/SellerDashboard"));
 
 function App() {
+  const [login, setLogin] = useState(
+    () => JSON.parse(localStorage.getItem("login")) || false
+  );
+
   const [adminLogin, setAdminLogin] = useState(
     () => JSON.parse(localStorage.getItem("adminLogin")) || false
   );
@@ -37,13 +48,14 @@ function App() {
 
   const [sellerLogin, setSellerLogin] = useState(
     () => JSON.parse(localStorage.getItem("sellerLogin")) || false
-  )
+  );
 
   useEffect(() => {
     localStorage.setItem("adminLogin", JSON.stringify(adminLogin));
     localStorage.setItem("buyerLogin", JSON.stringify(buyerLogin));
     localStorage.setItem("sellerLogin", JSON.stringify(sellerLogin));
-  }, [adminLogin]);
+    localStorage.setItem("login", JSON.stringify(login));
+  }, [login, adminLogin, sellerLogin, buyerLogin]);
 
   return (
     <div className="App">
@@ -59,6 +71,20 @@ function App() {
         pauseOnHover
         theme="colored"
       />
+      <BrowserRouter>
+        <LoginContext.Provider value={{ login, setLogin }}>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <Suspense fallback={<Loader />}>
+                  <LoginPortal />
+                </Suspense>
+              }
+            />
+          </Routes>
+        </LoginContext.Provider>
+      </BrowserRouter>
       <BrowserRouter>
         <AdminLoginContext.Provider value={{ adminLogin, setAdminLogin }}>
           {adminLogin && <Header />}
@@ -113,29 +139,29 @@ function App() {
             />
           </Routes>
         </BuyerLoginContext.Provider>
-        <SellerLoginContext.Provider value={{sellerLogin, setSellerLogin}}>
+        <SellerLoginContext.Provider value={{ sellerLogin, setSellerLogin }}>
           <Routes>
             <Route
               path="/sellerCreation"
               element={
-                <Suspense fallback={<Loader/>}>
-                  <SellerCreation/>
+                <Suspense fallback={<Loader />}>
+                  <SellerCreation />
                 </Suspense>
               }
             />
             <Route
               path="/sellerLogin"
               element={
-                <Suspense fallback={<Loader/>}>
-                  <SellerLoginCredentials/>
+                <Suspense fallback={<Loader />}>
+                  <SellerLoginCredentials />
                 </Suspense>
               }
             />
             <Route
               path="/sellerDashboards"
               element={
-                <Suspense fallback={<Loader/>}>
-                  <SellerDashboard/>
+                <Suspense fallback={<Loader />}>
+                  <SellerDashboard />
                 </Suspense>
               }
             />

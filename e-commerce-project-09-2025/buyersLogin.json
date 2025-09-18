@@ -24,6 +24,16 @@
       "address": "Pushkar, Ajmer",
       "selectedState": "RJ",
       "pin": "305022"
+    },
+    {
+      "id": "d9a2",
+      "name": "Pradeep Khatri",
+      "age": "25",
+      "email": "gokulvaasi@gmail.com",
+      "password": "PK08@gokulvaasi",
+      "address": "Pushkar",
+      "selectedState": "RJ",
+      "pin": "305022"
     }
   ]
 }

@@ -8,6 +8,7 @@ import BuyerCreation from "./modules/buyer/BuyerCreation";
 import SellerCreation from "./modules/seller/SellerCreation";
 import LoginPortal from "./modules/login/LoginPortal";
 import AddProduct from "./components/admin/AddProduct";
+import ViewProducts from "./components/admin/ViewProducts";
 
 export const AdminLoginContext = createContext();
 export const BuyerLoginContext = createContext();
@@ -110,8 +111,16 @@ function App() {
                   <Route
                     path="/add"
                     element={
-                      <Suspense fallback={<Loader/>}>
-                        <AddProduct/>
+                      <Suspense fallback={<Loader />}>
+                        <AddProduct />
+                      </Suspense>
+                    }
+                  />
+                  <Route
+                    path="/view"
+                    element={
+                      <Suspense fallback={<Loader />}>
+                        <ViewProducts />
                       </Suspense>
                     }
                   />

@@ -1,22 +1,18 @@
 {
   "products": [
     {
-      "productName": "Mattress",
-      "desc": "fdgsd",
-      "id": "c04a"
-    },
-    {
-      "id": "4a72",
-      "productName": "Queen Size Luxurious Bed",
-      "brandName": "Pepperfry",
+      "id": "3c1d",
+      "productName": "Sheesham Wood Queen Size Bed With Side Storage (Walnut Finish)",
+      "brandName": "Adolph",
       "productCat": "Bed",
-      "productDesc": "Upgrade your bedroom with the timeless elegance of a Pepperfry Queen Size Bed, crafted to bring you the perfect balance of comfort, functionality, and design. Built with high-quality engineered wood and a sturdy frame, this bed ensures long-lasting durability while maintaining a sleek and modern aesthetic.\n\nWith its queen size dimensions, it provides ample space for a restful night’s sleep without overwhelming your bedroom. The thoughtfully designed structure offers excellent back support, making it suitable for everyday use.",
+      "productDesc": "Bring home the perfect combination of strength, style, and functionality with this Sheesham Wood Queen Size Bed, finished in a rich Walnut tone that exudes timeless elegance.\n\nCrafted from premium solid Sheesham wood, the bed is built for unmatched durability and a natural wood grain texture that adds warmth to your bedroom décor. Its queen size dimensions provide ample sleeping space, ensuring comfort for couples and families alike.\n\nThe highlight of this bed lies in its full drawer storage design. With spacious pull-out drawers seamlessly integrated on both sides, it offers an intelligent solution to store extra bedding, pillows, blankets, or seasonal essentials—keeping your bedroom neat and clutter-free without compromising on style.\n\nThe Walnut finish enhances the natural beauty of Sheesham wood, giving the bed a luxurious appeal while blending effortlessly with both modern and traditional interiors. Designed with precision, this bed also comes with a sturdy frame that ensures stability and long-lasting use.",
       "productImgs": [
-        {},
-        {},
-        {},
-        {},
-        {}
+        "blob:http://localhost:3000/c9c13af5-f1c9-4180-a6b1-bd69aab59d63",
+        "blob:http://localhost:3000/7323e2a4-dd41-4fc0-aec1-b8be1a2b6091",
+        "blob:http://localhost:3000/f896f064-978e-4a33-9a6d-d65fdd04fcf7",
+        "blob:http://localhost:3000/adb70e51-b38c-43ea-a134-7e0a591d8e4e",
+        "blob:http://localhost:3000/eec41edc-28ff-43bb-b151-2e1ee2bf13ee",
+        "blob:http://localhost:3000/0cb5471e-377e-4506-b593-284b03ab5827"
       ],
       "productSize": "queen",
       "mrp": "71999"

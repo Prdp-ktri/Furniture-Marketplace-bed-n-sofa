@@ -16,11 +16,19 @@ function Header() {
   };
   return (
     <header className="fixed top-0 left-0 w-full z-50 bg-gradient-to-r from-indigo-500 via-sky-500 to-emerald-500 text-white shadow-md">
-      <nav className="container mx-auto flex justify-between items-center px-4 py-3">
+      <nav className="container mx-auto flex justify-around items-center px-4 py-3">
         {/* Logo / Brand */}
         <img
-          src="D:\Projects\04-e-commerce-project\bed-n-sofa-E-commerce-project\e-commerce-project-09-2025\public\Finesse-Logo.png"
+          src="/Finesse-Logo.png"
           alt=""
+          style={{
+            zIndex: "2",
+            height: "75px",
+            width: "150px",
+            backgroundColor: "white",
+            display: "flex",
+            justifyContent: "end",
+          }}
         />
         <div className="text-xl font-bold tracking-wide">Furnishing Homes</div>
         {/* Desktop Menu */}
@@ -42,7 +50,7 @@ function Header() {
                   <Link to={"/manage"}>Manage Products</Link>
                 </li>
                 <li className="px-4 py-2 hover:bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% cursor-pointer">
-                  <Link to={'/view'}>View Products</Link>
+                  <Link to={"/view"}>View Products</Link>
                 </li>
               </ul>
             )}
@@ -79,7 +87,7 @@ function Header() {
         {/* Right side login/logout (Desktop) */}
         <div className="hidden md:block">
           <button
-            onClick={() => setAdminLogin(false)}
+            onClick={handleLogOut}
             className="bg-blue-600 px-4 py-2 rounded-lg hover:bg-blue-500 transition-colors"
           >
             Logout

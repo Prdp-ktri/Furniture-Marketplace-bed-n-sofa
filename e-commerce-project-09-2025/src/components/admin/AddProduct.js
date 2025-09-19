@@ -20,7 +20,8 @@ function AddProduct() {
       return;
     }
 
-    setProductImgs(files);
+    const urls = files.map((file) => URL.(file));
+    setProductImgs(urls);
   };
 
   const addProduct = (e) => {
@@ -149,7 +150,7 @@ function AddProduct() {
                 {productImgs.map((img, index) => (
                   <img
                     key={index}
-                    src={URL.createObjectURL(img)}
+                    src={img}
                     alt={`preview-${index}`}
                     className="w-20 h-20 object-cover rounded-lg shadow"
                   />

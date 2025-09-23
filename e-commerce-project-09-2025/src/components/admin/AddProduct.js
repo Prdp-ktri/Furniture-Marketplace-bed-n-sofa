@@ -101,7 +101,7 @@ function AddProduct() {
                 <option value="Bed">Bed</option>
                 <option value="Sofa">Sofa</option>
                 <option value="Mattress">Mattress</option>
-                <option value="Mates">Mates</option>
+                <option value="Mats">Mats</option>
               </select>
             </div>
             {/* Product Name */}
@@ -195,8 +195,8 @@ function AddProduct() {
                     <option value="single">Single Seater</option>
                     <option value="double">Double Seater</option>
                     <option value="three">Three Seater</option>
-                    <option value="four">Four Seater</option>
-                    <option value="five">Five Seater</option>
+                    <option value="recliner">Recliners</option>
+                    <option value="sofa-sets">Sofa Sets</option>
                   </>
                 ) : productCat === "Mattress" ? (
                   <>
@@ -205,10 +205,10 @@ function AddProduct() {
                     <option value="double">Double Bed</option>
                     <option value="single">Single Bed</option>
                   </>
-                ) : productCat === "Mates" ? (
+                ) : productCat === "Mats" ? (
                   <>
-                    <option value="yoga">Yoga Mates</option>
-                    <option value="door">Door Mates</option>
+                    <option value="yoga">Yoga Mats</option>
+                    <option value="door">Door Mats</option>
                   </>
                 ) : null}
               </select>

@@ -29,7 +29,6 @@ function ViewProducts() {
               <th className="p-3 text-sm md:text-base">Image</th>
               <th className="p-3 text-sm md:text-base">Size</th>
               <th className="p-3 text-sm md:text-base">MRP</th>
-              <th className="p-3 text-sm md:text-base">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -57,7 +56,7 @@ function ViewProducts() {
                   <td className="p-3">
                     {v.productImgs.map((img, index) => (
                       <img
-                      key={index}
+                        key={index}
                         src={img}
                         alt={`${v.productName}-{i}`}
                         className="w-16 h-16 object-cover rounded-lg shadow-sm border"
@@ -69,14 +68,6 @@ function ViewProducts() {
                   </td>
                   <td className="p-3 text-gray-700 font-semibold text-sm md:text-base">
                     ₹{v.mrp}
-                  </td>
-                  <td className="p-3">
-                    <Link
-                      to={"/editProducts/" + v.id}
-                      className="text-teal-600 hover:text-teal-800 font-medium text-xs md:text-base bg-green-950 rounded-full"
-                    > 
-                      Edit Details
-                    </Link>
                   </td>
                 </tr>
               ))

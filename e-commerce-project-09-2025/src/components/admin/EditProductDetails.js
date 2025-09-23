@@ -103,7 +103,7 @@ function EditProductDetails() {
                   <option value="Bed">Bed</option>
                   <option value="sofa">Sofa</option>
                   <option value="mattress">Mattress</option>
-                  <option value="mate">Mate</option>
+                  <option value="mats">Mats</option>
                 </select>
               </td>
               <td>
@@ -168,10 +168,10 @@ function EditProductDetails() {
                       <option value="double">Double Bed</option>
                       <option value="single">Single Bed</option>
                     </>
-                  ) : productCat === "Mates" ? (
+                  ) : productCat === "Mats" ? (
                     <>
-                      <option value="yoga">Yoga Mates</option>
-                      <option value="door">Door Mates</option>
+                      <option value="yoga">Yoga Mats</option>
+                      <option value="door">Door Mats</option>
                     </>
                   ) : null}
                 </select>

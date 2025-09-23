@@ -3,12 +3,13 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { createContext, lazy, Suspense, useEffect, useState } from "react";
 import Loader from "./components/admin/Loader";
 import { ToastContainer } from "react-toastify";
-import Header from "./components/admin/Header";
+import Header from "./components/admin/AdminHeader";
 import BuyerCreation from "./modules/buyer/BuyerCreation";
 import SellerCreation from "./modules/seller/SellerCreation";
 import LoginPortal from "./modules/login/LoginPortal";
 import AddProduct from "./components/admin/AddProduct";
 import ViewProducts from "./components/admin/ViewProducts";
+import EditProductDetails from "./components/admin/EditProductDetails";
 
 export const AdminLoginContext = createContext();
 export const BuyerLoginContext = createContext();
@@ -109,7 +110,7 @@ function App() {
                     }
                   />
                   <Route
-                    path="/add"
+                    path="/addProduct"
                     element={
                       <Suspense fallback={<Loader />}>
                         <AddProduct />
@@ -117,11 +118,25 @@ function App() {
                     }
                   />
                   <Route
-                    path="/view"
+                    path="/viewProducts"
                     element={
                       <Suspense fallback={<Loader />}>
                         <ViewProducts />
                       </Suspense>
+                    }
+                  />
+                  <Route
+                    path="/editProducts/:ids"
+                    element={
+                      <Suspense fallback={<Loader />}>
+                        <EditProductDetails />
+                      </Suspense>
+                    }
+                  />
+                  <Route
+                    path="/manageProducts"
+                    element={
+                      <Suspense fallback={<Loader/>}></Suspense>
                     }
                   />
 

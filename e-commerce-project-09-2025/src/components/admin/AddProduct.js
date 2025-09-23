@@ -12,17 +12,18 @@ function AddProduct() {
   const [mrp, setMrp] = useState(0);
   const navigate = useNavigate();
 
-  const handleImageUpload = (e) => {
-    const files = Array.from(e.target.files);
+  // const handleImageUpload = (e) => {
+  //   const files = Array.from(e.target.files);
+  //   console.log(files);
 
-    if (files.length > 6) {
-      toast.error("You can upload a maximum of 6 images.");
-      return;
-    }
+  //   if (files.length > 6) {
+  //     toast.error("You can upload a maximum of 6 images.");
+  //     return;
+  //   }
 
-    const urls = files.map((file) => URL.(file));
-    setProductImgs(urls);
-  };
+  //   const urls = files.map((file) => URL.createObjectURL(file));
+  //   setProductImgs(urls);
+  // };
 
   const addProduct = (e) => {
     e.preventDefault();
@@ -56,7 +57,7 @@ function AddProduct() {
     }).then((res) => {
       if (res) {
         toast("Product Added for latching on Seller Portal");
-        navigate("/products");
+        navigate("/viewProducts");
       }
     });
   };
@@ -64,7 +65,7 @@ function AddProduct() {
   return (
     <div>
       <div
-        className="min-h-screen flex items-center justify-center bg-gradient-to-r from-green-100 to-teal-100 p-6"
+        className="min-h-screen flex items-center justify-center bg-gradient-to-r from-green-300 to-teal-300 p-6"
         style={{ width: "100vw", height: "150vh", paddingTop: "40px" }}
       >
         <div className="w-full max-w-2xl bg-white/80 backdrop-blur-lg rounded-2xl shadow-xl p-8">
@@ -86,7 +87,6 @@ function AddProduct() {
                 className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-teal-400 focus:outline-none"
               />
             </div>
-
             {/* Category */}
             <div>
               <label className="block font-medium text-gray-700 mb-1">
@@ -104,7 +104,6 @@ function AddProduct() {
                 <option value="Mates">Mates</option>
               </select>
             </div>
-
             {/* Product Name */}
             <div>
               <label className="block font-medium text-gray-700 mb-1">
@@ -118,7 +117,6 @@ function AddProduct() {
                 className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-teal-400 focus:outline-none"
               />
             </div>
-
             {/* Description */}
             <div>
               <label className="block font-medium text-gray-700 mb-1">
@@ -131,33 +129,49 @@ function AddProduct() {
                 className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-teal-400 focus:outline-none h-24"
               ></textarea>
             </div>
-
             {/* Images */}
             <div>
               <label className="block font-medium text-gray-700 mb-1">
-                Upload up to 6 product images
+                Enter product image URLs
               </label>
               <input
-                type="file"
-                accept="image/*"
-                multiple
-                onChange={handleImageUpload}
-                className="w-full text-gray-600 file:mr-4 file:py-2 file:px-4 
-                        file:rounded-lg file:border-0 file:bg-teal-500 
-                        file:text-white hover:file:bg-teal-600"
+                type="url"
+                name=""
+                placeholder="Paste image URLs and press enter"
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    e.preventDefault();
+                    if (e.target.value.trim()) {
+                      setProductImgs([...productImgs, e.target.value.trim()]);
+                      e.target.value = "";
+                    }
+                  }
+                }}
+                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-teal-400 focus:outline-none"
+                id=""
               />
+              <p className="text-sm text-gray-500 mt-1">
+                Press Enter to add multiple URLs
+              </p>
               <div className="flex flex-wrap gap-3 mt-3">
-                {productImgs.map((img, index) => (
+                {productImgs.map((url, index) => {
                   <img
                     key={index}
-                    src={img}
+                    src={url}
                     alt={`preview-${index}`}
                     className="w-20 h-20 object-cover rounded-lg shadow"
-                  />
-                ))}
+                  />;
+                })}
               </div>
             </div>
 
+            {/* <img
+                    key={index}
+                    src={productImgs.name}
+                    alt={`preview-${index}`}
+                    className="w-20 h-20 object-cover rounded-lg shadow"
+                  />
+                ) */}
             {/* Size */}
             <div>
               <label className="block font-medium text-gray-700 mb-1">
@@ -199,7 +213,6 @@ function AddProduct() {
                 ) : null}
               </select>
             </div>
-
             {/* MRP */}
             <div>
               <label className="block font-medium text-gray-700 mb-1">
@@ -212,7 +225,6 @@ function AddProduct() {
                 className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-teal-400 focus:outline-none"
               />
             </div>
-
             {/* Submit */}
             <button
               type="submit"

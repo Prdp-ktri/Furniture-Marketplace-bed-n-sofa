@@ -1,7 +1,7 @@
 import React from "react";
 
-function Header() {
+function BuyerHeader() {
   return <div></div>;
 }
 
-export default Header;
+export default BuyerHeader;

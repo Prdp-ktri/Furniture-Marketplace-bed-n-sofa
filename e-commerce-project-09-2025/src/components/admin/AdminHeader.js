@@ -3,7 +3,7 @@ import React, { useContext, useState } from "react";
 import { AdminLoginContext } from "../../App";
 import { Link, useNavigate } from "react-router-dom";
 
-function Header() {
+function AdminHeader() {
   const [isProductsOpen, setProductsOpen] = useState(false);
   const [isProfilesOpen, setProfilesOpen] = useState(false);
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -14,6 +14,7 @@ function Header() {
     setAdminLogin(false);
     navigate("/");
   };
+
   return (
     <header className="fixed top-0 left-0 w-full z-50 bg-gradient-to-r from-indigo-500 via-sky-500 to-emerald-500 text-white shadow-md">
       <nav className="container mx-auto flex justify-around items-center px-4 py-3">
@@ -44,13 +45,13 @@ function Header() {
             {isProductsOpen && (
               <ul className="absolute bg-white text-gray-800 mt-2 rounded-lg shadow-lg w-44 animate-fade-in">
                 <li className="px-4 py-2 hover:bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% cursor-pointer">
-                  <Link to={"/add"}>Add Product</Link>
+                  <Link to={"/addProduct"}>Add Product</Link>
                 </li>
                 <li className="px-4 py-2 hover:bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% cursor-pointer">
-                  <Link to={"/manage"}>Manage Products</Link>
+                  <Link to={"/manageProducts"}>Manage Products</Link>
                 </li>
                 <li className="px-4 py-2 hover:bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% cursor-pointer">
-                  <Link to={"/view"}>View Products</Link>
+                  <Link to={"/viewProducts"}>View Products</Link>
                 </li>
               </ul>
             )}
@@ -127,4 +128,4 @@ function Header() {
   );
 }
 
-export default Header;
+export default AdminHeader;

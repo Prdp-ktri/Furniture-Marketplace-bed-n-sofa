@@ -18,22 +18,24 @@ function EditProductDetails() {
     fetch("http://localhost:9000/products/" + id)
       .then((res) => {
         if (!res.ok) {
-          throw new Error("Failed to fetch product");
+          throw new Error("Failed to fetch product with ID" + id);
         }
         return res.json();
       })
       .then((data) => {
+        if (!data) throw new Error("No product found");
         setBrandName(data.brandName);
         setProductCat(data.productCat);
         setProductName(data.productName);
         setProductDesc(data.productDesc);
         setProductImgs(data.productImgs);
         setProductSize(data.productSize);
-        setMrp(data.mrp);
+        setMrp(data.mrp || 0);
       })
-      .catch((err) => console.error(err))
+      .catch((err) => toast.error(err.message))
       .finally(() => setLoading(false));
   }, [id]);
+  // console.log(id);
 
   if (loading) {
     return <h2 style={{ textAlign: "center" }}>Loading product...!</h2>;
@@ -59,7 +61,7 @@ function EditProductDetails() {
     }).then((res) => {
       if (res) {
         toast("Updated...!");
-        navigate("/viewProducts");
+        navigate("/manageProducts");
       }
     });
   };
@@ -77,6 +79,7 @@ function EditProductDetails() {
               <th>Product Description</th>
               <th>Product Images</th>
               <th>Product Size</th>
+              <th>MRP</th>
             </tr>
           </thead>
           <tbody>
@@ -100,7 +103,7 @@ function EditProductDetails() {
                   }}
                   id=""
                 >
-                  <option value="Bed">Bed</option>
+                  <option value="bed">Bed</option>
                   <option value="sofa">Sofa</option>
                   <option value="mattress">Mattress</option>
                   <option value="mats">Mats</option>
@@ -131,7 +134,9 @@ function EditProductDetails() {
                   type="text"
                   value={productImgs}
                   onChange={(e) => {
-                    setProductImgs(e.target.value);
+                    setProductImgs(
+                      e.target.value.split(",").map((img) => img.trim())
+                    );
                   }}
                   alt=""
                 />
@@ -146,14 +151,14 @@ function EditProductDetails() {
                   id=""
                 >
                   <option value="">Select Size</option>
-                  {productCat === "Bed" ? (
+                  {productCat === "bed" ? (
                     <>
                       <option value="king">King Size</option>
                       <option value="queen">Queen Size</option>
                       <option value="single">Single Bed</option>
                       <option value="double">Double Bed</option>
                     </>
-                  ) : productCat === "Sofa" ? (
+                  ) : productCat === "sofa" ? (
                     <>
                       <option value="single">Single Seater</option>
                       <option value="double">Double Seater</option>
@@ -161,14 +166,14 @@ function EditProductDetails() {
                       <option value="four">Four Seater</option>
                       <option value="five">Five Seater</option>
                     </>
-                  ) : productCat === "Mattress" ? (
+                  ) : productCat === "mattress" ? (
                     <>
                       <option value="king">King Size</option>
                       <option value="queen">Queen Size</option>
                       <option value="double">Double Bed</option>
                       <option value="single">Single Bed</option>
                     </>
-                  ) : productCat === "Mats" ? (
+                  ) : productCat === "mats" ? (
                     <>
                       <option value="yoga">Yoga Mats</option>
                       <option value="door">Door Mats</option>
@@ -190,7 +195,7 @@ function EditProductDetails() {
             </tr>
           </tbody>
         </table>
-        <button>Submit</button>
+        <button>Update</button>
       </form>
     </div>
   );

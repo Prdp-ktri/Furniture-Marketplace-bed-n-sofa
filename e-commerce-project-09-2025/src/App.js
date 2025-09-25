@@ -10,14 +10,12 @@ import LoginPortal from "./modules/login/LoginPortal";
 import AddProduct from "./components/admin/AddProduct";
 import ViewProducts from "./components/admin/ViewProducts";
 import EditProductDetails from "./components/admin/EditProductDetails";
+import ManageProducts from "./components/admin/ManageProducts";
 
 export const AdminLoginContext = createContext();
 export const BuyerLoginContext = createContext();
 export const SellerLoginContext = createContext();
 export const LoginContext = createContext();
-
-const LoginCredentials = lazy(() => import("./modules/login/LoginCredentials"));
-const LoginDashboard = lazy(() => import("./modules/login/LoginPortal"));
 
 const AdminLoginCredentials = lazy(() =>
   import("./modules/admin/AdminLoginCredentials")
@@ -126,7 +124,7 @@ function App() {
                     }
                   />
                   <Route
-                    path="/editProducts/:ids"
+                    path="/editProductDetails/:id"
                     element={
                       <Suspense fallback={<Loader />}>
                         <EditProductDetails />
@@ -136,7 +134,9 @@ function App() {
                   <Route
                     path="/manageProducts"
                     element={
-                      <Suspense fallback={<Loader/>}></Suspense>
+                      <Suspense fallback={<Loader />}>
+                        <ManageProducts />
+                      </Suspense>
                     }
                   />
 

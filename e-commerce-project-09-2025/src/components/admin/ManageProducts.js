@@ -29,7 +29,7 @@ function ManageProducts() {
   const deleteData = (id) => {
     fetch("http://localhost:9000/products/" + id, {
       method: "DELETE",
-      headers: { "Content-type": "appplication/json" },
+      headers: { "Content-type": "application/json" },
     }).then((res) => {
       if (res) {
         toast("Product Deleted...!");

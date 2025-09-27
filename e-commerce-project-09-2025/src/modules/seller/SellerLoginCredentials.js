@@ -7,20 +7,20 @@ function SellerLoginCredentials() {
   const { setSellerLogin } = useContext(SellerLoginContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [details, setDetails] = useState([]);
+  const [data, setData] = useState([]);
 
   const navigate = useNavigate();
 
   useEffect(() => {
     fetch("http://localhost:7000/sellers")
       .then((res) => res.json())
-      .then((details) => setDetails(details))
-      .catch((err) => console.error("Error fetching seller details:", err));
+      .then((data) => setData(data))
+      .catch((err) => console.error("Error fetching seller data:", err));
   }, []);
 
   const handleSellerLogin = (e) => {
     e.preventDefault();
-    let sellerUser = details.find(
+    let sellerUser = data.find(
       (v) => v.email === email && v.password === password
     );
     if (sellerUser) {

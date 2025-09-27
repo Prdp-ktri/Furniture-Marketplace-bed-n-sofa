@@ -9,7 +9,6 @@ import SellerCreation from "./modules/seller/SellerCreation";
 import LoginPortal from "./modules/login/LoginPortal";
 import AddProduct from "./components/admin/AddProduct";
 import ViewProducts from "./components/admin/ViewProducts";
-import EditProductDetails from "./components/admin/EditProductDetails";
 import ManageProducts from "./components/admin/ManageProducts";
 
 export const AdminLoginContext = createContext();
@@ -31,6 +30,8 @@ const SellerLoginCredentials = lazy(() =>
   import("./modules/seller/SellerLoginCredentials")
 );
 const SellerDashboard = lazy(() => import("./modules/seller/SellerDashboard"));
+
+const EditProductDetails = lazy(()=>import("./components/admin/EditProductDetails"));
 
 function App() {
   const [login, setLogin] = useState(

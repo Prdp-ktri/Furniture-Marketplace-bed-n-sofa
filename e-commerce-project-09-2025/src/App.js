@@ -3,13 +3,16 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { createContext, lazy, Suspense, useEffect, useState } from "react";
 import Loader from "./components/admin/Loader";
 import { ToastContainer } from "react-toastify";
-import Header from "./components/admin/AdminHeader";
+// import Header from "./components/admin/AdminHeader";
 import BuyerCreation from "./modules/buyer/BuyerCreation";
 import SellerCreation from "./modules/seller/SellerCreation";
 import LoginPortal from "./modules/login/LoginPortal";
 import AddProduct from "./components/admin/AddProduct";
 import ViewProducts from "./components/admin/ViewProducts";
 import ManageProducts from "./components/admin/ManageProducts";
+import AllLatchableProducts from "./modules/seller/AllLatchableProducts";
+import AdminHeader from "./components/admin/AdminHeader";
+import SellerHeader from "./components/seller/SellerHeader";
 
 export const AdminLoginContext = createContext();
 export const BuyerLoginContext = createContext();
@@ -81,7 +84,8 @@ function App() {
               <SellerLoginContext.Provider
                 value={{ sellerLogin, setSellerLogin }}
               >
-                {adminLogin && <Header />}
+                {adminLogin && <AdminHeader />}
+                {sellerLogin && <SellerHeader />}
                 <Routes>
                   {/* General */}
                   <Route
@@ -191,6 +195,14 @@ function App() {
                     element={
                       <Suspense fallback={<Loader />}>
                         <SellerDashboard />
+                      </Suspense>
+                    }
+                  />
+                  <Route
+                    path="/allLatchableProducts"
+                    element={
+                      <Suspense fallback={<Loader />}>
+                        <AllLatchableProducts />
                       </Suspense>
                     }
                   />

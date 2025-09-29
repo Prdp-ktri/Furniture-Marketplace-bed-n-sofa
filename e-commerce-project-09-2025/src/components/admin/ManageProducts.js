@@ -6,7 +6,7 @@ function ManageProducts() {
   const [details, setDetails] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [expanded, setExpanded] = useState({});
-  // const {id} = useParams();
+  // const { id } = useParams();
 
   useEffect(() => {
     fetch("http://localhost:9000/products")

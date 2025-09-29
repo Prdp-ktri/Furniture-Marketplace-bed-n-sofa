@@ -1,13 +1,19 @@
 import React, { useState } from "react";
 import { Menu, X, ChevronDown } from "lucide-react"; // for icons
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function SellerHeader() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
+  const navigate = useNavigate();
 
   const toggleDropdown = (menu) => {
     setOpenDropdown(openDropdown === menu ? null : menu);
+  };
+
+  const AllProducts = (e) => {
+    e.preventDefault();
+    navigate("/allLatchableProducts");
   };
 
   return (
@@ -28,12 +34,12 @@ function SellerHeader() {
             </button>
             {openDropdown === "products" && (
               <div className="absolute top-full mt-2 bg-white text-black rounded-md shadow-lg w-48">
-                <a
-                  href="#all-products"
+                <button
+                  onClick={AllProducts}
                   className="block px-4 py-2 hover:bg-gray-100"
                 >
                   All Products
-                </a>
+                </button>
                 <a
                   href="#latched-products"
                   className="block px-4 py-2 hover:bg-gray-100"
@@ -85,7 +91,7 @@ function SellerHeader() {
         {/* Right-side Login / Sign Up */}
         <div className="hidden md:flex items-center space-x-4">
           <Link to="/sellerLogin" className="hover:text-gray-200">
-            Login
+            Logout
           </Link>
           <Link
             to="/sellerCreation"
@@ -116,7 +122,11 @@ function SellerHeader() {
             </button>
             {openDropdown === "products" && (
               <div className="pl-4 space-y-1">
-                <a href="#all-products" className="block hover:text-gray-300">
+                <a
+                  href="#all-products"
+                  className="block hover:text-gray-300"
+                  onClick={AllProducts}
+                >
                   All Products
                 </a>
                 <a
@@ -154,7 +164,7 @@ function SellerHeader() {
 
             <div className="border-t border-blue-300 mt-2 pt-2 space-y-2">
               <Link to="/sellerLogin" className="block">
-                Login
+                Logout
               </Link>
               <Link
                 to="/sellerCreation"

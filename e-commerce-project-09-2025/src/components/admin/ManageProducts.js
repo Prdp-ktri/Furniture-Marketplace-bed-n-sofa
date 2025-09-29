@@ -114,14 +114,16 @@ function ManageProducts() {
                         )}
                       </td>
                       <td className="p-3">
-                        {v.productImgs.map((v, index) => (
-                          <img
-                            key={index}
-                            src={v}
-                            alt={`${v.productName}-${index}`}
-                            className="w-16 h-16 object-cover rounded-lg shadow-sm border"
-                          />
-                        ))}
+                        {v.productImgs.map((obj, index) => {
+                          return (
+                            <img
+                              key={index}
+                              src={obj}
+                              alt={`${obj.productName}-${index}`}
+                              className="w-16 h-16 object-cover rounded-lg shadow-sm border"
+                            />
+                          );
+                        })}
                       </td>
                       <td className="p-3 text-gray-700 text-sm md:text-base">
                         {v.productSize}

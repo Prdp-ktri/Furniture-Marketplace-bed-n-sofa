@@ -35,10 +35,9 @@
       "mrp": "67449"
     },
     {
-      "id": "e63a",
-      "productName": "Bacon Bed With Box Storage (Queen Size, Walnut Finish)",
       "brandName": "Bacon",
       "productCat": "Bed",
+      "productName": "Bacon Bed With Box Storage (Queen Size, Walnut Finesse)",
       "productDesc": "1. Bacon bed with box storage is celebrating contemporary furniture design. It consists of a horizontal slot on the backrest which is distinct and noticeable. This bed is equipped with a box storage which is divided into four partitions from top to keep all your extra items.\n\n2. This queen size bed is crafted from the finest quality of Sheesham to ensure durability and sturdiness.\n\n3. To maintain the shine, it is available in different finish options viz., Honey and Walnut.",
       "productImgs": [
         "https://d2emch4msrhe87.cloudfront.net/image/cache/data/bed-with-storage/bacon-bed-with-box-storage/walnut/updated/new-logo/new+-3D/11-810x702.jpg",
@@ -49,7 +48,8 @@
         "https://d2emch4msrhe87.cloudfront.net/image/cache/data/bed-with-storage/bacon-bed-with-box-storage/walnut/updated/new-logo/new+-3D/9-810x702.jpg"
       ],
       "productSize": "queen",
-      "mrp": "76349"
+      "mrp": 76559,
+      "id": "e63a"
     },
     {
       "id": "bcec",

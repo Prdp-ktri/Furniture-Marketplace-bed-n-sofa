@@ -31,7 +31,9 @@ const SellerLoginCredentials = lazy(() =>
 );
 const SellerDashboard = lazy(() => import("./modules/seller/SellerDashboard"));
 
-const EditProductDetails = lazy(()=>import("./components/admin/EditProductDetails"));
+const EditProductDetails = lazy(() =>
+  import("./components/admin/EditProductDetails")
+);
 
 function App() {
   const [login, setLogin] = useState(

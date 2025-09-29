@@ -67,135 +67,139 @@ function EditProductDetails() {
   };
 
   return (
-    <div>
-      <form onSubmit={handleUpdatedData}>
-        <table>
-          <thead>
-            <tr>
-              <th>Product ID</th>
-              <th>Brand Name</th>
-              <th>Product Category</th>
-              <th>Product Name</th>
-              <th>Product Description</th>
-              <th>Product Images</th>
-              <th>Product Size</th>
-              <th>MRP</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td></td>
-              <td>
-                <input
-                  type="text"
-                  value={brandName}
-                  onChange={(e) => {
-                    setBrandName(e.target.value);
-                  }}
-                />
-              </td>
-              <td>
-                <select
-                  name=""
-                  value={productCat}
-                  onChange={(e) => {
-                    setProductCat(e.target.value);
-                  }}
-                  id=""
-                >
-                  <option value="bed">Bed</option>
-                  <option value="sofa">Sofa</option>
-                  <option value="mattress">Mattress</option>
-                  <option value="mats">Mats</option>
-                </select>
-              </td>
-              <td>
-                <input
-                  type="text"
-                  value={productName}
-                  onChange={(e) => {
-                    setProductName(e.target.value);
-                  }}
-                />
-              </td>
-              <td>
-                <input
-                  type="text"
-                  name=""
-                  value={productDesc}
-                  onChange={(e) => {
-                    setProductDesc(e.target.value);
-                  }}
-                  id=""
-                />
-              </td>
-              <td>
-                <input
-                  type="text"
-                  value={productImgs}
-                  onChange={(e) => {
-                    setProductImgs(
-                      e.target.value.split(",").map((img) => img.trim())
-                    );
-                  }}
-                  alt=""
-                />
-              </td>
-              <td>
-                <select
-                  name=""
-                  value={productSize}
-                  onChange={(e) => {
-                    setProductSize(e.target.value);
-                  }}
-                  id=""
-                >
-                  <option value="">Select Size</option>
-                  {productCat === "bed" ? (
-                    <>
-                      <option value="king">King Size</option>
-                      <option value="queen">Queen Size</option>
-                      <option value="single">Single Bed</option>
-                      <option value="double">Double Bed</option>
-                    </>
-                  ) : productCat === "sofa" ? (
-                    <>
-                      <option value="single">Single Seater</option>
-                      <option value="double">Double Seater</option>
-                      <option value="three">Three Seater</option>
-                      <option value="four">Four Seater</option>
-                      <option value="five">Five Seater</option>
-                    </>
-                  ) : productCat === "mattress" ? (
-                    <>
-                      <option value="king">King Size</option>
-                      <option value="queen">Queen Size</option>
-                      <option value="double">Double Bed</option>
-                      <option value="single">Single Bed</option>
-                    </>
-                  ) : productCat === "mats" ? (
-                    <>
-                      <option value="yoga">Yoga Mats</option>
-                      <option value="door">Door Mats</option>
-                    </>
-                  ) : null}
-                </select>
-              </td>
-              <td>
-                <input
-                  type="number"
-                  name=""
-                  value={mrp}
-                  onChange={(e) => {
-                    setMrp(Number(e.target.value));
-                  }}
-                  id=""
-                />
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <button>Update</button>
+    <div className="flex justify-center items-start mt-32 px-4">
+      <form
+        onSubmit={handleUpdatedData}
+        className="w-full max-w-6xl bg-gray-300 shadow-lg rounded-2xl p-6 border border-gray-500"
+      >
+        <h2 className="text-2xl font-semibold mb-6 text-gray-800">
+          Edit Product
+        </h2>
+        <div className="overflow-x-auto">
+          <table className="w-full border-collapse text-sm md:text-base">
+            <thead>
+              <tr className="bg-gray-100 text-gray-700">
+                <th className="px-4 py-3 text-left border">Product ID</th>
+                <th className="px-4 py-3 text-left border">Brand Name</th>
+                <th className="px-4 py-3 text-left border">Category</th>
+                <th className="px-4 py-3 text-left border">Product Name</th>
+                <th className="px-4 py-3 text-left border">Description</th>
+                <th className="px-4 py-3 text-left border">Images</th>
+                <th className="px-4 py-3 text-left border">Size</th>
+                <th className="px-4 py-3 text-left border">MRP</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="hover:bg-gray-400">
+                <td className="px-4 py-2 border text-gray-500 italic">Auto</td>
+                <td className="px-4 py-2 border">
+                  <input
+                    type="text"
+                    value={brandName}
+                    onChange={(e) => setBrandName(e.target.value)}
+                    className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  />
+                </td>
+                <td className="px-4 py-2 border">
+                  <select
+                    value={productCat}
+                    onChange={(e) => setProductCat(e.target.value)}
+                    className="w-full px-3 py-2 border rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  >
+                    <option value="bed">Bed</option>
+                    <option value="sofa">Sofa</option>
+                    <option value="mattress">Mattress</option>
+                    <option value="mats">Mats</option>
+                  </select>
+                </td>
+                <td className="px-4 py-2 border">
+                  <input
+                    type="text"
+                    value={productName}
+                    onChange={(e) => setProductName(e.target.value)}
+                    className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  />
+                </td>
+                <td className="px-4 py-2 border">
+                  <input
+                    type="text"
+                    value={productDesc}
+                    onChange={(e) => setProductDesc(e.target.value)}
+                    className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  />
+                </td>
+                <td className="px-4 py-2 border">
+                  <input
+                    type="text"
+                    value={productImgs}
+                    onChange={(e) =>
+                      setProductImgs(
+                        e.target.value.split(",").map((img) => img.trim())
+                      )
+                    }
+                    className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  />
+                  <p className="text-xs text-gray-500 mt-1">
+                    Separate multiple URLs with commas
+                  </p>
+                </td>
+                <td className="px-4 py-2 border">
+                  <select
+                    value={productSize}
+                    onChange={(e) => setProductSize(e.target.value)}
+                    className="w-full px-3 py-2 border rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  >
+                    <option value="">Select Size</option>
+                    {productCat === "bed" ? (
+                      <>
+                        <option value="king">King Size</option>
+                        <option value="queen">Queen Size</option>
+                        <option value="single">Single Bed</option>
+                        <option value="double">Double Bed</option>
+                      </>
+                    ) : productCat === "sofa" ? (
+                      <>
+                        <option value="single">Single Seater</option>
+                        <option value="double">Double Seater</option>
+                        <option value="three">Three Seater</option>
+                        <option value="four">Four Seater</option>
+                        <option value="five">Five Seater</option>
+                      </>
+                    ) : productCat === "mattress" ? (
+                      <>
+                        <option value="king">King Size</option>
+                        <option value="queen">Queen Size</option>
+                        <option value="double">Double Bed</option>
+                        <option value="single">Single Bed</option>
+                      </>
+                    ) : productCat === "mats" ? (
+                      <>
+                        <option value="yoga">Yoga Mats</option>
+                        <option value="door">Door Mats</option>
+                      </>
+                    ) : null}
+                  </select>
+                </td>
+                <td className="px-4 py-2 border">
+                  <input
+                    type="number"
+                    value={mrp}
+                    onChange={(e) => setMrp(Number(e.target.value))}
+                    className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div className="flex justify-end mt-6">
+          <button
+            type="submit"
+            className="px-6 py-2 bg-indigo-600 text-white font-medium rounded-lg shadow hover:bg-indigo-700 transition"
+          >
+            Update
+          </button>
+        </div>
       </form>
     </div>
   );

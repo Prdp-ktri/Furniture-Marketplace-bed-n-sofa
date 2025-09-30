@@ -153,7 +153,7 @@ function AllLatchableProducts() {
           </div>
         </div>
       </div>
-      <div>{latchProduct && <LatchProduct product={} />}</div>
+      <div>{latchProduct && <LatchProduct />}</div>
     </div>
   );
 }

@@ -33,6 +33,7 @@ function SellerLoginCredentials() {
     );
     if (sellerUser) {
       toast.success("Welcome to your Seller Portal");
+      localStorage.setItem("loggedInSeller", JSON.stringify(sellerUser));
       setSellerLogin(true);
       setAdminLogin(false);
       setBuyerLogin(false);

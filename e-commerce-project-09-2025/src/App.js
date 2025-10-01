@@ -20,6 +20,7 @@ import AllLatchableProducts from "./modules/seller/AllLatchableProducts";
 import AdminHeader from "./components/admin/AdminHeader";
 import SellerHeader from "./components/seller/SellerHeader";
 import BuyerHeader from "./components/buyer/BuyerHeader";
+import LatchedProducts from "./modules/seller/LatchedProducts";
 
 export const AdminLoginContext = createContext();
 export const BuyerLoginContext = createContext();
@@ -237,6 +238,14 @@ function App() {
                     element={
                       <Suspense fallback={<Loader />}>
                         <AllLatchableProducts />
+                      </Suspense>
+                    }
+                  />
+                  <Route
+                    path="/latchedProducts"
+                    element={
+                      <Suspense fallback={<Loader />}>
+                        <LatchedProducts />
                       </Suspense>
                     }
                   />

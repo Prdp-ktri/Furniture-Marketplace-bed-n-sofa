@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import LatchProduct from "../../components/seller/LatchProduct";
+import LatchedProducts from "./LatchedProducts";
 
 function AllLatchableProducts() {
   const [details, setDetails] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [expanded, setExpanded] = useState({});
   const [latchProduct, setLatchProduct] = useState(null);
+  const [latchedProducts, setLatchedProducts] = useState([]);
 
   useEffect(() => {
     fetch("http://localhost:9000/products")
@@ -25,135 +27,124 @@ function AllLatchableProducts() {
     setExpanded((prev) => ({ ...prev, [id]: !prev[id] }));
   };
 
-  const showProductDetails = () => {
-    setLatchProduct(!latchProduct);
+  const showProductDetails = (product) => {
+    setLatchProduct(product); // store product for modal
+  };
+
+  const handleLatch = (product, quantity, price) => {
+    setLatchedProducts((prev) => [...prev, { ...product, quantity, price }]);
+    setLatchProduct(null);
   };
 
   return (
     <div>
-      <div>
-        <div
-          className="min-h-screen w-full bg-gradient-to-r from-green-300 to-teal-300 flex items-start justify-center p-6"
-          style={{ marginTop: "50px" }}
-        >
-          <div className="w-full max-w-9xl bg-white shadow-lg rounded-2xl p-4 overflow-x-auto">
-            <h1 className="text-3xl md:text-4xl font-extrabold text-teal-700 mb-8 text-center drop-shadow-lg">
-              Products List
-            </h1>
-            <div className="flex justify-center mb-6">
-              <select
-                name=""
-                value={selectedCategory}
-                id="productCategorySelections"
-                onChange={(e) => {
-                  setSelectedCategory(e.target.value);
-                }}
-                className="border border-teal-400 p-2 rounded-lg text-gray-700 shadow-md focus:outline-none focus:ring-2 focus:ring-teal-500"
-              >
-                <option value="">All Categories</option>
-                <option value="bed">Bed</option>
-                <option value="sofa">Sofa</option>
-                <option value="mattress">Mattress</option>
-                <option value="mats">Mats</option>
-              </select>
-            </div>
-            <table className="w-full border-collapse">
-              <thead>
-                <tr className="bg-teal-500 text-white text-left">
-                  <th className="p-3 text-sm md:text-base">ID</th>
-                  <th className="p-3 text-sm md:text-base">Product Name</th>
-                  <th className="p-3 text-sm md:text-base">Brand</th>
-                  <th className="p-3 text-sm md:text-base">Category</th>
-                  <th className="p-3 text-sm md:text-base">Description</th>
-                  <th className="p-3 text-sm md:text-base">Image</th>
-                  <th className="p-3 text-sm md:text-base">Size</th>
-                  <th className="p-3 text-sm md:text-base">MRP</th>
-                  <th className="p-3 text-sm md:text-base" colSpan={2}>
-                    Actions
-                  </th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                {filteredProducts.length > 0 ? (
-                  filteredProducts.map((v) => {
-                    const isExpanded = expanded[v.id];
-                    const shortDesc = v.productDesc.slice(0, 100);
-                    // console.log(v)
-
-                    return (
-                      <tr
-                        key={v.id}
-                        className="odd:bg-orange-300 even:bg-green-300 hover:bg-teal-50 transition-colors"
-                      >
-                        <td className="p-3 text-gray-700 text-sm md:text-base">
-                          {v.id}
-                        </td>
-                        <td className="p-3 font-semibold text-gray-800 text-sm md:text-base">
-                          {v.productName}
-                        </td>
-                        <td className="p-3 text-gray-700 text-sm md:text-base">
-                          {v.brandName}
-                        </td>
-                        <td className="p-3 text-gray-700 text-sm md:text-base">
-                          {v.productCat}
-                        </td>
-                        <td className="p-3 text-gray-600 text-sm md:text-base whitespace-pre-wrap">
-                          {isExpanded ? v.productDesc : shortDesc}
-                          {v.productDesc.length > 100 && (
-                            <button
-                              onClick={() => toggleExpand(v.id)}
-                              className="ml-2 text-teal-600 font-semibold hover:underline"
-                            >
-                              {isExpanded ? "Read Less" : "Read More"}
-                            </button>
-                          )}
-                        </td>
-                        <td className="p-3">
-                          {v.productImgs.map((obj, index) => {
-                            return (
-                              <img
-                                key={index}
-                                src={obj}
-                                alt={`${obj.productName}-${index}`}
-                                className="w-16 h-16 object-cover rounded-lg shadow-sm border"
-                              />
-                            );
-                          })}
-                        </td>
-                        <td className="p-3 text-gray-700 text-sm md:text-base">
-                          {v.productSize}
-                        </td>
-                        <td className="p-3 text-gray-700 font-bold text-sm md:text-base">
-                          ₹{v.mrp}
-                        </td>
-                        <td>
-                          <button onClick={showProductDetails}>
-                            Latch on this Product
-                          </button>
-                        </td>
-                        <td>
-                          <div>{latchProduct && <LatchProduct />}</div>
-                        </td>
-                      </tr>
-                    );
-                  })
-                ) : (
-                  <tr>
-                    <td
-                      colSpan="8"
-                      className="text-center text-gray-600 py-6 text-sm md:text-base"
-                    >
-                      No products available
-                    </td>
-                  </tr>
-                )}
-              </tbody>
-            </table>
+      <div
+        className="min-h-screen w-full bg-gradient-to-r from-green-300 to-teal-300 flex items-start justify-center p-6"
+        style={{ marginTop: "50px" }}
+      >
+        <div className="w-full max-w-9xl bg-white shadow-lg rounded-2xl p-4 overflow-x-auto">
+          <h1 className="text-3xl md:text-4xl font-extrabold text-teal-700 mb-8 text-center drop-shadow-lg">
+            Products List
+          </h1>
+          <div className="flex justify-center mb-6">
+            <select
+              value={selectedCategory}
+              onChange={(e) => setSelectedCategory(e.target.value)}
+              className="border border-teal-400 p-2 rounded-lg text-gray-700 shadow-md focus:outline-none focus:ring-2 focus:ring-teal-500"
+            >
+              <option value="">All Categories</option>
+              <option value="bed">Bed</option>
+              <option value="sofa">Sofa</option>
+              <option value="mattress">Mattress</option>
+              <option value="mats">Mats</option>
+            </select>
           </div>
+          <table className="w-full border-collapse">
+            <thead>
+              <tr className="bg-teal-500 text-white text-left">
+                <th className="p-3">ID</th>
+                <th className="p-3">Product Name</th>
+                <th className="p-3">Brand</th>
+                <th className="p-3">Category</th>
+                <th className="p-3">Description</th>
+                <th className="p-3">Image</th>
+                <th className="p-3">Size</th>
+                <th className="p-3">MRP</th>
+                <th className="p-3">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filteredProducts.length > 0 ? (
+                filteredProducts.map((v) => {
+                  const isExpanded = expanded[v.id];
+                  const shortDesc = v.productDesc.slice(0, 100);
+
+                  return (
+                    <tr
+                      key={v.id}
+                      className="odd:bg-orange-300 even:bg-green-300 hover:bg-teal-50 transition-colors"
+                    >
+                      <td className="p-3">{v.id}</td>
+                      <td className="p-3 font-semibold">{v.productName}</td>
+                      <td className="p-3">{v.brandName}</td>
+                      <td className="p-3">{v.productCat}</td>
+                      <td className="p-3 whitespace-pre-wrap">
+                        {isExpanded ? v.productDesc : shortDesc}
+                        {v.productDesc.length > 100 && (
+                          <button
+                            onClick={() => toggleExpand(v.id)}
+                            className="ml-2 text-teal-600 font-semibold hover:underline"
+                          >
+                            {isExpanded ? "Read Less" : "Read More"}
+                          </button>
+                        )}
+                      </td>
+                      <td className="p-3">
+                        {v.productImgs.map((obj, index) => (
+                          <img
+                            key={index}
+                            src={obj}
+                            alt={`${v.productName}-${index}`}
+                            className="w-16 h-16 object-cover rounded-lg shadow-sm border"
+                          />
+                        ))}
+                      </td>
+                      <td className="p-3">{v.productSize}</td>
+                      <td className="p-3 font-bold">₹{v.mrp}</td>
+                      <td>
+                        <button
+                          onClick={() => showProductDetails(v)}
+                          className="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700"
+                        >
+                          Latch on this Product
+                        </button>
+                      </td>
+                    </tr>
+                  );
+                })
+              ) : (
+                <tr>
+                  <td colSpan="9" className="text-center py-6">
+                    No products available
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
         </div>
       </div>
-      <div>{latchProduct && <LatchProduct />}</div>
+
+      {/* Modal */}
+      {latchProduct && (
+        <LatchProduct
+          product={latchProduct}
+          onLatch={handleLatch}
+          onClose={() => setLatchProduct(null)}
+        />
+      )}
+
+      {/* Latched Products */}
+      <LatchedProducts latchedProducts={latchedProducts} />
     </div>
   );
 }

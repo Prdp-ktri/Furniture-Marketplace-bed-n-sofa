@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Menu, X, ChevronDown } from "lucide-react"; // for icons
 import { Link, useNavigate } from "react-router-dom";
+import { SellerLoginContext } from "../../App";
 
 function SellerHeader() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
+  const { setSellerLogin } = useContext(SellerLoginContext);
   const navigate = useNavigate();
 
   const toggleDropdown = (menu) => {
@@ -14,6 +16,17 @@ function SellerHeader() {
   const AllProducts = (e) => {
     e.preventDefault();
     navigate("/allLatchableProducts");
+  };
+
+  const LatchedProducts = (e) => {
+    e.preventDefault();
+    navigate("/latchedProducts");
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("loggedInSeller");
+    setSellerLogin(false);
+    navigate("/sellerLogin");
   };
 
   return (
@@ -40,12 +53,12 @@ function SellerHeader() {
                 >
                   All Products
                 </button>
-                <a
-                  href="#latched-products"
+                <button
+                  onClick={LatchedProducts}
                   className="block px-4 py-2 hover:bg-gray-100"
                 >
                   Latched Products
-                </a>
+                </button>
               </div>
             )}
           </div>
@@ -90,9 +103,9 @@ function SellerHeader() {
 
         {/* Right-side Login / Sign Up */}
         <div className="hidden md:flex items-center space-x-4">
-          <Link to="/sellerLogin" className="hover:text-gray-200">
+          <button onClick={handleLogout} className="hover:text-gray-200">
             Logout
-          </Link>
+          </button>
           <Link
             to="/sellerCreation"
             className="bg-white text-blue-600 px-3 py-1 rounded-md hover:bg-gray-100"
@@ -122,19 +135,18 @@ function SellerHeader() {
             </button>
             {openDropdown === "products" && (
               <div className="pl-4 space-y-1">
-                <a
-                  href="#all-products"
+                <button
                   className="block hover:text-gray-300"
                   onClick={AllProducts}
                 >
                   All Products
-                </a>
-                <a
-                  href="#latched-products"
+                </button>
+                <button
                   className="block hover:text-gray-300"
+                  onClick={LatchedProducts}
                 >
                   Latched Products
-                </a>
+                </button>
               </div>
             )}
 

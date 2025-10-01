@@ -1,10 +1,18 @@
 import React, { useContext, useEffect, useState } from "react";
-import { SellerLoginContext } from "../../App";
+import {
+  AdminLoginContext,
+  BuyerLoginContext,
+  LoginContext,
+  SellerLoginContext,
+} from "../../App";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 function SellerLoginCredentials() {
   const { setSellerLogin } = useContext(SellerLoginContext);
+  const { setBuyerLogin } = useContext(BuyerLoginContext);
+  const { setAdminLogin } = useContext(AdminLoginContext);
+  const { setLogin } = useContext(LoginContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [data, setData] = useState([]);
@@ -26,6 +34,9 @@ function SellerLoginCredentials() {
     if (sellerUser) {
       toast.success("Welcome to your Seller Portal");
       setSellerLogin(true);
+      setAdminLogin(false);
+      setBuyerLogin(false);
+      setLogin(true);
       navigate("/sellerDashboard");
     } else {
       toast.error("Invalid Seller Credentials, Try Again!");

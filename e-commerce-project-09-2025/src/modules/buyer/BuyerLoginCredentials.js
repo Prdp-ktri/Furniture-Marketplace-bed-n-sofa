@@ -1,10 +1,18 @@
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { BuyerLoginContext } from "../../App";
+import {
+  AdminLoginContext,
+  BuyerLoginContext,
+  LoginContext,
+  SellerLoginContext,
+} from "../../App";
 
 export default function BuyerLoginCredentials() {
+  const { setSellerLogin } = useContext(SellerLoginContext);
   const { setBuyerLogin } = useContext(BuyerLoginContext);
+  const { setAdminLogin } = useContext(AdminLoginContext);
+  const { setLogin } = useContext(LoginContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [data, setData] = useState([]);
@@ -26,6 +34,9 @@ export default function BuyerLoginCredentials() {
     if (buyerUser) {
       toast("Welcome to our Store");
       setBuyerLogin(true);
+      setAdminLogin(false);
+      setSellerLogin(false);
+      setLogin(true);
       navigate("/buyersDashboard");
     } else {
       toast("Invalid Buyer Login Credentials, Try Again!");

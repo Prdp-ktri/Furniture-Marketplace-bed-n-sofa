@@ -1,5 +1,11 @@
 import "./App.css";
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import {
+  BrowserRouter,
+  Navigate,
+  Route,
+  Routes,
+  useLocation,
+} from "react-router-dom";
 import { createContext, lazy, Suspense, useEffect, useState } from "react";
 import Loader from "./components/admin/Loader";
 import { ToastContainer } from "react-toastify";
@@ -13,6 +19,7 @@ import ManageProducts from "./components/admin/ManageProducts";
 import AllLatchableProducts from "./modules/seller/AllLatchableProducts";
 import AdminHeader from "./components/admin/AdminHeader";
 import SellerHeader from "./components/seller/SellerHeader";
+import BuyerHeader from "./components/buyer/BuyerHeader";
 
 export const AdminLoginContext = createContext();
 export const BuyerLoginContext = createContext();
@@ -37,6 +44,29 @@ const SellerDashboard = lazy(() => import("./modules/seller/SellerDashboard"));
 const EditProductDetails = lazy(() =>
   import("./components/admin/EditProductDetails")
 );
+
+function HeaderWrapper({ adminLogin, sellerLogin, buyerLogin }) {
+  const location = useLocation();
+
+  const noHeaderaRoutes = [
+    "/",
+    "/sellerCreation",
+    "/sellerLogin",
+    "/buyerLogin",
+    "/buyerCreation",
+    "/adminLogin",
+  ];
+
+  if (noHeaderaRoutes.includes(location.pathname)) {
+    return null;
+  }
+
+  if (adminLogin) return <AdminHeader />;
+  if (sellerLogin) return <SellerHeader />;
+  if (buyerLogin) return <BuyerHeader />;
+
+  return null;
+}
 
 function App() {
   const [login, setLogin] = useState(
@@ -84,8 +114,12 @@ function App() {
               <SellerLoginContext.Provider
                 value={{ sellerLogin, setSellerLogin }}
               >
-                {adminLogin && <AdminHeader />}
-                {sellerLogin && <SellerHeader />}
+                <HeaderWrapper
+                  adminLogin={adminLogin}
+                  sellerLogin={sellerLogin}
+                  buyerLogin={buyerLogin}
+                />
+
                 <Routes>
                   {/* General */}
                   <Route

@@ -1,11 +1,19 @@
 import React, { useContext, useEffect, useState } from "react";
-import { AdminLoginContext } from "../../App";
+import {
+  AdminLoginContext,
+  BuyerLoginContext,
+  LoginContext,
+  SellerLoginContext,
+} from "../../App";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import "./AdminLoginCredentials.css";
 
 function AdminLoginCredentials() {
+  const { setSellerLogin } = useContext(SellerLoginContext);
+  const { setBuyerLogin } = useContext(BuyerLoginContext);
   const { setAdminLogin } = useContext(AdminLoginContext);
+  const { setLogin } = useContext(LoginContext);
   const [email, setEmail] = useState("");
   const [pw, setPw] = useState("");
   const [data, setData] = useState([]);
@@ -26,6 +34,9 @@ function AdminLoginCredentials() {
     if (adminUser) {
       toast("Welcome to the Admin Dashboard!");
       setAdminLogin(true);
+      setBuyerLogin(false);
+      setSellerLogin(false);
+      setLogin(true);
       navigate("/adminDashboard");
     } else {
       toast("Invalid Admin Login Credentials, Enter Again");

@@ -1,13 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import LatchProduct from "../../components/seller/LatchProduct";
 import LatchedProducts from "./LatchedProducts";
+import { LatchedProductsContext } from "../../context/LatchedProductsContext";
 
 function AllLatchableProducts() {
   const [details, setDetails] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [expanded, setExpanded] = useState({});
   const [latchProduct, setLatchProduct] = useState(null);
-  const [latchedProducts, setLatchedProducts] = useState([]);
+  const { latchedProducts, setLatchedProducts } = useContext(
+    LatchedProductsContext
+  );
 
   useEffect(() => {
     fetch("http://localhost:9000/products")
@@ -144,7 +147,7 @@ function AllLatchableProducts() {
       )}
 
       {/* Latched Products */}
-      <LatchedProducts latchedProducts={latchedProducts} />
+      <LatchedProducts />
     </div>
   );
 }

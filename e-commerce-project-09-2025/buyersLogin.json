@@ -34,6 +34,16 @@
       "address": "Pushkar",
       "selectedState": "RJ",
       "pin": "305022"
+    },
+    {
+      "id": "9d19",
+      "name": "Lokesh Modi",
+      "age": "37",
+      "email": "lokeshmodi@gmail.com",
+      "password": "LK@buyer",
+      "address": "Navrangpura, Ahmedabad",
+      "selectedState": "GJ",
+      "pin": "308001"
     }
   ]
 }

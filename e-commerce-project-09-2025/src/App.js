@@ -21,6 +21,7 @@ import AdminHeader from "./components/admin/AdminHeader";
 import SellerHeader from "./components/seller/SellerHeader";
 import BuyerHeader from "./components/buyer/BuyerHeader";
 import LatchedProducts from "./modules/seller/LatchedProducts";
+import { LatchedProductsProvider } from "./context/LatchedProductsContext";
 
 export const AdminLoginContext = createContext();
 export const BuyerLoginContext = createContext();
@@ -121,135 +122,141 @@ function App() {
                   buyerLogin={buyerLogin}
                 />
 
-                <Routes>
-                  {/* General */}
-                  <Route
-                    path="/"
-                    element={
-                      <Suspense fallback={<Loader />}>
-                        <LoginPortal />
-                      </Suspense>
-                    }
-                  />
+                <LatchedProductsProvider>
+                  <Routes>
+                    {/* General */}
+                    <Route
+                      path="/"
+                      element={
+                        <Suspense fallback={<Loader />}>
+                          <LoginPortal />
+                        </Suspense>
+                      }
+                    />
 
-                  {/* Admin */}
-                  <Route
-                    path="/adminLogin"
-                    element={
-                      <Suspense fallback={<Loader />}>
-                        <AdminLoginCredentials />
-                      </Suspense>
-                    }
-                  />
-                  <Route
-                    path="/adminDashboard"
-                    element={
-                      <Suspense fallback={<Loader />}>
-                        {adminLogin ? <AdminDashboard /> : <Navigate to="/" />}
-                      </Suspense>
-                    }
-                  />
-                  <Route
-                    path="/addProduct"
-                    element={
-                      <Suspense fallback={<Loader />}>
-                        <AddProduct />
-                      </Suspense>
-                    }
-                  />
-                  <Route
-                    path="/viewProducts"
-                    element={
-                      <Suspense fallback={<Loader />}>
-                        <ViewProducts />
-                      </Suspense>
-                    }
-                  />
-                  <Route
-                    path="/editProductDetails/:id"
-                    element={
-                      <Suspense fallback={<Loader />}>
-                        <EditProductDetails />
-                      </Suspense>
-                    }
-                  />
-                  <Route
-                    path="/manageProducts"
-                    element={
-                      <Suspense fallback={<Loader />}>
-                        <ManageProducts />
-                      </Suspense>
-                    }
-                  />
+                    {/* Admin */}
+                    <Route
+                      path="/adminLogin"
+                      element={
+                        <Suspense fallback={<Loader />}>
+                          <AdminLoginCredentials />
+                        </Suspense>
+                      }
+                    />
+                    <Route
+                      path="/adminDashboard"
+                      element={
+                        <Suspense fallback={<Loader />}>
+                          {adminLogin ? (
+                            <AdminDashboard />
+                          ) : (
+                            <Navigate to="/" />
+                          )}
+                        </Suspense>
+                      }
+                    />
+                    <Route
+                      path="/addProduct"
+                      element={
+                        <Suspense fallback={<Loader />}>
+                          <AddProduct />
+                        </Suspense>
+                      }
+                    />
+                    <Route
+                      path="/viewProducts"
+                      element={
+                        <Suspense fallback={<Loader />}>
+                          <ViewProducts />
+                        </Suspense>
+                      }
+                    />
+                    <Route
+                      path="/editProductDetails/:id"
+                      element={
+                        <Suspense fallback={<Loader />}>
+                          <EditProductDetails />
+                        </Suspense>
+                      }
+                    />
+                    <Route
+                      path="/manageProducts"
+                      element={
+                        <Suspense fallback={<Loader />}>
+                          <ManageProducts />
+                        </Suspense>
+                      }
+                    />
 
-                  {/* Buyer */}
-                  <Route
-                    path="/buyerCreation"
-                    element={
-                      <Suspense fallback={<Loader />}>
-                        <BuyerCreation />
-                      </Suspense>
-                    }
-                  />
-                  <Route
-                    path="/buyerLogin"
-                    element={
-                      <Suspense fallback={<Loader />}>
-                        <BuyerLoginCredentials />
-                      </Suspense>
-                    }
-                  />
-                  <Route
-                    path="/buyerDashboard"
-                    element={
-                      <Suspense fallback={<Loader />}>
-                        <BuyerDashboard />
-                      </Suspense>
-                    }
-                  />
+                    {/* Buyer */}
+                    <Route
+                      path="/buyerCreation"
+                      element={
+                        <Suspense fallback={<Loader />}>
+                          <BuyerCreation />
+                        </Suspense>
+                      }
+                    />
+                    <Route
+                      path="/buyerLogin"
+                      element={
+                        <Suspense fallback={<Loader />}>
+                          <BuyerLoginCredentials />
+                        </Suspense>
+                      }
+                    />
+                    <Route
+                      path="/buyerDashboard"
+                      element={
+                        <Suspense fallback={<Loader />}>
+                          <BuyerDashboard />
+                        </Suspense>
+                      }
+                    />
 
-                  {/* Seller */}
-                  <Route
-                    path="/sellerCreation"
-                    element={
-                      <Suspense fallback={<Loader />}>
-                        <SellerCreation />
-                      </Suspense>
-                    }
-                  />
-                  <Route
-                    path="/sellerLogin"
-                    element={
-                      <Suspense fallback={<Loader />}>
-                        <SellerLoginCredentials />
-                      </Suspense>
-                    }
-                  />
-                  <Route
-                    path="/sellerDashboard"
-                    element={
-                      <Suspense fallback={<Loader />}>
-                        <SellerDashboard />
-                      </Suspense>
-                    }
-                  />
-                  <Route
-                    path="/allLatchableProducts"
-                    element={
-                      <Suspense fallback={<Loader />}>
-                        <AllLatchableProducts />
-                      </Suspense>
-                    }
-                  />
-                  <Route
-                    path="/latchedProducts"
-                    element={
-                      <Suspense fallback={<Loader />}>
-                        <LatchedProducts />
-                      </Suspense>
-                    }
-                  />
-                </Routes>
+                    {/* Seller */}
+                    <Route
+                      path="/sellerCreation"
+                      element={
+                        <Suspense fallback={<Loader />}>
+                          <SellerCreation />
+                        </Suspense>
+                      }
+                    />
+                    <Route
+                      path="/sellerLogin"
+                      element={
+                        <Suspense fallback={<Loader />}>
+                          <SellerLoginCredentials />
+                        </Suspense>
+                      }
+                    />
+                    <Route
+                      path="/sellerDashboard"
+                      element={
+                        <Suspense fallback={<Loader />}>
+                          <SellerDashboard />
+                        </Suspense>
+                      }
+                    />
+                    <Route
+                      path="/allLatchableProducts"
+                      element={
+                        <Suspense fallback={<Loader />}>
+                          <AllLatchableProducts />
+                        </Suspense>
+                      }
+                    />
+                    <Route
+                      path="/latchedProducts"
+                      element={
+                        <Suspense fallback={<Loader />}>
+                          <LatchedProducts />
+                        </Suspense>
+                      }
+                    />
+                  </Routes>
+                </LatchedProductsProvider>
               </SellerLoginContext.Provider>
             </BuyerLoginContext.Provider>
           </AdminLoginContext.Provider>

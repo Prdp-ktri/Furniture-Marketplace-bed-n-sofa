@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
+import { LatchedProductsContext } from "../../context/LatchedProductsContext";
 
-function LatchedProducts({ latchedProducts = [] }) {
+function LatchedProducts() {
+  const { latchedProducts } = useContext(LatchedProductsContext);
+
   if (!latchedProducts || latchedProducts.length === 0) {
     return (
       <div className="p-6">

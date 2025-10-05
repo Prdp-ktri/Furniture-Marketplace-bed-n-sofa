@@ -17,7 +17,8 @@ function AllLatchableProducts() {
       .then((res) => res.json())
       .then((data) => {
         setDetails(data);
-      });
+      })
+      .catch((err) => console.error("Failed to fetch products:", err));
   }, []);
 
   const filteredProducts = selectedCategory
@@ -35,7 +36,25 @@ function AllLatchableProducts() {
   };
 
   const handleLatch = (product, quantity, price) => {
-    setLatchedProducts((prev) => [...prev, { ...product, quantity, price }]);
+    const newProduct = {
+      prouctName: product.productName,
+      brandName: product.brandName,
+      productCategory: product.productCat,
+      productDescription: product.productDesc,
+      productImages: product.productImgs[1],
+      productSize: product.productSize,
+      productMRP: product.mrp,
+      quantity,
+      price,
+    };
+
+    const existing = JSON.parse(localStorage.getItem("latchedProducts")) || [];
+
+    const updated = [...existing, newProduct];
+
+    localStorage.setItem("latchedProducts", JSON.stringify(updated));
+
+    setLatchedProducts(updated);
     setLatchProduct(null);
   };
 
@@ -105,6 +124,7 @@ function AllLatchableProducts() {
                       <td className="p-3">
                         {v.productImgs.map((obj, index) => (
                           <img
+                            loading="lazy"
                             key={index}
                             src={obj}
                             alt={`${v.productName}-${index}`}
@@ -147,7 +167,7 @@ function AllLatchableProducts() {
       )}
 
       {/* Latched Products */}
-      <LatchedProducts />
+      {/* <LatchedProducts /> */}
     </div>
   );
 }

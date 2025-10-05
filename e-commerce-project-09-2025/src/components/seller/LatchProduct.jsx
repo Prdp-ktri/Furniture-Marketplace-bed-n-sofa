@@ -15,7 +15,7 @@ function LatchProduct({ product, onLatch, onClose }) {
       style={{
         zIndex: "1000",
         width: "300px",
-        height: "350px",
+        height: "450px",
         borderRadius: "15px",
         position: "fixed",
         top: "50%",

@@ -8,20 +8,22 @@ function LatchedProducts() {
 
   // Load latched products from localStorage
   useEffect(() => {
-    try {
-      const stored = localStorage.getItem("latchedProducts");
+    const loggedInSeller = JSON.parse(localStorage.getItem("loggedInSeller"));
+    if (loggedInSeller) {
+      const storageKey = `latchedProducts_${loggedInSeller.email}`;
+      const stored = localStorage.getItem(storageKey);
       if (stored) {
         setLatchedProducts(JSON.parse(stored));
       }
-    } catch (err) {
-      console.error("Error reading latched products:", err);
-      setLatchedProducts([]);
     }
   }, []);
 
   // Save to localStorage whenever products change
   const updateLocalStorage = (updatedProducts) => {
-    localStorage.setItem("latchedProducts", JSON.stringify(updatedProducts));
+    const loggedInSeller = JSON.parse(localStorage.getItem("loggedInSeller"));
+    if (!loggedInSeller) return;
+    const storageKey = `latchedProducts_${loggedInSeller.email}`;
+    localStorage.setItem(storageKey, JSON.stringify(updatedProducts));
     setLatchedProducts(updatedProducts);
   };
 

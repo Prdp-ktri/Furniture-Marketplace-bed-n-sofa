@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 // import SellerHeader from "../../components/seller/SellerHeader";
 
 function SellerDashboard() {
   const [seller, setSeller] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const storedSeller = JSON.parse(localStorage.getItem("loggedInSeller"));
@@ -14,6 +16,16 @@ function SellerDashboard() {
   if (!seller) {
     return <p>Loading seller details...</p>;
   }
+
+  const AllLatchableProducts = (e) => {
+    e.preventDefault();
+    navigate("/allLatchableProducts");
+  };
+
+  const LatchedProducts = (e) => {
+    e.preventDefault();
+    navigate("/latchedProducts");
+  };
 
   return (
     <div>
@@ -29,6 +41,21 @@ function SellerDashboard() {
         <p>GST No.: {seller.gst}</p>
         <p>Trademark: {seller.trademark}</p>
         <p>Address: {seller.address}</p>
+
+        <div className="mt-6 space-x-4">
+          <button
+            onClick={AllLatchableProducts}
+            className="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700"
+          >
+            View All Latchable Products
+          </button>
+          <button
+            onClick={LatchedProducts}
+            className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
+          >
+            View My Latched Products
+          </button>
+        </div>
       </div>
     </div>
   );

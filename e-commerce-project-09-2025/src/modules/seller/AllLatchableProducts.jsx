@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import LatchProduct from "../../components/seller/LatchProduct";
-import LatchedProducts from "./LatchedProducts";
 import { LatchedProductsContext } from "../../context/LatchedProductsContext";
 
 function AllLatchableProducts() {
@@ -36,6 +35,11 @@ function AllLatchableProducts() {
   };
 
   const handleLatch = (product, quantity, price) => {
+    const loggedInSeller = JSON.parse(localStorage.getItem("loggedInSeller"));
+    if (!loggedInSeller) return alert("No seller logged in!");
+
+    const storageKey = `latchedProducts_${loggedInSeller.email}`;
+
     const newProduct = {
       prouctName: product.productName,
       brandName: product.brandName,
@@ -49,11 +53,9 @@ function AllLatchableProducts() {
     };
 
     const existing = JSON.parse(localStorage.getItem("latchedProducts")) || [];
-
     const updated = [...existing, newProduct];
 
-    localStorage.setItem("latchedProducts", JSON.stringify(updated));
-
+    localStorage.setItem(storageKey, JSON.stringify(updated));
     setLatchedProducts(updated);
     setLatchProduct(null);
   };

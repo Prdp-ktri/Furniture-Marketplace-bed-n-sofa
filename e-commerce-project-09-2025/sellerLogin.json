@@ -2,7 +2,8 @@
   "sellers": [
     {
       "email": "pradeepkhatri44@live.com",
-      "password": "PK08@seller"
+      "password": "PK08@seller",
+      "id": "f6b1"
     },
     {
       "id": "d430",
@@ -15,6 +16,18 @@
       "storeName": "Akashic Records",
       "gst": "08EIYPK5827C1ZS",
       "trademark": "112045689"
+    },
+    {
+      "id": "21c1",
+      "name": "Chavan Patel",
+      "email": "chavanpatel77@gmail.com",
+      "password": "CP@seller",
+      "address": "H-207, Casey Complex, Narayanpura",
+      "selectedState": "RJ",
+      "pin": "562135",
+      "storeName": "Pepperfry Furnishings",
+      "gst": "09CJPL5827C3MX",
+      "trademark": "452198639"
     }
   ]
 }

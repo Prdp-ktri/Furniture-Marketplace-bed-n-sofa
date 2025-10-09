@@ -93,6 +93,9 @@ function LatchedProducts() {
 
               {/* Product Info */}
               <h3 className="text-lg font-semibold">{product.productName}</h3>
+              <h3 className="text-sm text-black">
+                Product ID:<b> {product.id}</b>
+              </h3>
               <p className="text-sm text-gray-600">{product.brandName}</p>
               <p className="text-sm text-gray-600">{product.productCategory}</p>
 

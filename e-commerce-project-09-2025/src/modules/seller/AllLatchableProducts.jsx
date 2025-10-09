@@ -41,18 +41,19 @@ function AllLatchableProducts() {
     const storageKey = `latchedProducts_${loggedInSeller.email}`;
 
     const newProduct = {
+      id: product.id,
       prouctName: product.productName,
       brandName: product.brandName,
       productCategory: product.productCat,
       productDescription: product.productDesc,
-      productImages: product.productImgs[1],
+      productImages: product.productImgs[0],
       productSize: product.productSize,
       productMRP: product.mrp,
       quantity,
       price,
     };
 
-    const existing = JSON.parse(localStorage.getItem("latchedProducts")) || [];
+    const existing = JSON.parse(localStorage.getItem(storageKey)) || [];
     const updated = [...existing, newProduct];
 
     localStorage.setItem(storageKey, JSON.stringify(updated));

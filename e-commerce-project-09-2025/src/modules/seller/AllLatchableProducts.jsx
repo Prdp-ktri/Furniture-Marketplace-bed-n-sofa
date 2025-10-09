@@ -41,7 +41,7 @@ function AllLatchableProducts() {
     const storageKey = `latchedProducts_${loggedInSeller.email}`;
 
     const newProduct = {
-      id: product.id,
+      id: product.id || product._id || product.productId || Date.now() ,
       prouctName: product.productName,
       brandName: product.brandName,
       productCategory: product.productCat,

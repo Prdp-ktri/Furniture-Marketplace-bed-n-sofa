@@ -22,6 +22,8 @@ import SellerHeader from "./components/seller/SellerHeader";
 import BuyerHeader from "./components/buyer/BuyerHeader";
 import LatchedProducts from "./modules/seller/LatchedProducts";
 import { LatchedProductsProvider } from "./context/LatchedProductsContext";
+import ViewAllProducts from "./modules/buyer/ViewAllProducts";
+import ProductDetails from "./modules/buyer/ProductDetails";
 
 export const AdminLoginContext = createContext();
 export const BuyerLoginContext = createContext();
@@ -210,6 +212,22 @@ function App() {
                       element={
                         <Suspense fallback={<Loader />}>
                           <BuyerDashboard />
+                        </Suspense>
+                      }
+                    />
+                    <Route
+                      path="/viewAllProducts"
+                      element={
+                        <Suspense fallback={<Loader />}>
+                          <ViewAllProducts />
+                        </Suspense>
+                      }
+                    />
+                    <Route
+                      path="/product/:id"
+                      element={
+                        <Suspense fallback={<Loader />}>
+                          <ProductDetails />
                         </Suspense>
                       }
                     />

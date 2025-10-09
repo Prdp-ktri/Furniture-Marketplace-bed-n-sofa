@@ -35,6 +35,7 @@
       "mrp": "67449"
     },
     {
+      "id": "e63a",
       "brandName": "Bacon",
       "productCat": "Bed",
       "productName": "Bacon Bed With Box Storage (Queen Size, Walnut Finesse)",
@@ -48,8 +49,7 @@
         "https://d2emch4msrhe87.cloudfront.net/image/cache/data/bed-with-storage/bacon-bed-with-box-storage/walnut/updated/new-logo/new+-3D/9-810x702.jpg"
       ],
       "productSize": "queen",
-      "mrp": 76559,
-      "id": "e63a"
+      "mrp": 76559
     },
     {
       "id": "bcec",

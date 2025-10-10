@@ -24,6 +24,7 @@ import LatchedProducts from "./modules/seller/LatchedProducts";
 import { LatchedProductsProvider } from "./context/LatchedProductsContext";
 import ViewAllProducts from "./modules/buyer/ViewAllProducts";
 import ProductDetails from "./modules/buyer/ProductDetails";
+import Cart from "./modules/buyer/Cart";
 
 export const AdminLoginContext = createContext();
 export const BuyerLoginContext = createContext();
@@ -228,6 +229,14 @@ function App() {
                       element={
                         <Suspense fallback={<Loader />}>
                           <ProductDetails />
+                        </Suspense>
+                      }
+                    />
+                    <Route
+                      path="/cart"
+                      element={
+                        <Suspense fallback={<Loader />}>
+                          <Cart />
                         </Suspense>
                       }
                     />

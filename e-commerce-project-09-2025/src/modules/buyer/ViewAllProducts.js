@@ -52,9 +52,9 @@ function ViewAllProducts() {
               className="w-40 h-40 object-cover rounded-md mb-3"
             />
             <h3 className="text-lg font-semibold">{product.productName}</h3>
-            <p className="text-sm text-gray-500">₹{product.price}</p>
-            <p className="text-xs text-gray-500">
-              Seller: {product.sellerEmail}
+            <p className="text-lg text-red-500">₹{product.price}</p>
+            <p className="text-lg text-green-500 bg-orange-300 rounded-md">
+              Seller: {product.storeName}
             </p>
           </div>
         ))}

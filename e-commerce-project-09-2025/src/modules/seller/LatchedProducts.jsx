@@ -22,9 +22,17 @@ function LatchedProducts() {
   const updateLocalStorage = (updatedProducts) => {
     const loggedInSeller = JSON.parse(localStorage.getItem("loggedInSeller"));
     if (!loggedInSeller) return;
+
+    const updatedWithSeller = updatedProducts.map((p) => ({
+      ...p,
+      storeName: loggedInSeller.storeName,
+      email: loggedInSeller.email,
+      trademark: loggedInSeller.trademark,
+    }));
+
     const storageKey = `latchedProducts_${loggedInSeller.email}`;
-    localStorage.setItem(storageKey, JSON.stringify(updatedProducts));
-    setLatchedProducts(updatedProducts);
+    localStorage.setItem(storageKey, JSON.stringify(updatedWithSeller));
+    setLatchedProducts(updatedWithSeller);
   };
 
   // Remove a product

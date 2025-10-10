@@ -26,14 +26,21 @@ function SellerLoginCredentials() {
       .catch((err) => console.error("Error fetching seller data:", err));
   }, []);
 
-  const handleSellerLogin = (e) => {
+  const handleSellerLogin = async (e) => {
     e.preventDefault();
-    let sellerUser = data.find(
+    const sellerUser = data.find(
       (v) => v.email === email && v.password === password
     );
     if (sellerUser) {
       toast.success("Welcome to your Seller Portal");
-      localStorage.setItem("loggedInSeller", JSON.stringify(sellerUser));
+      localStorage.setItem(
+        "loggedInSeller",
+        JSON.stringify({
+          storeName: sellerUser.storeName,
+          email: sellerUser.email,
+          trademark: sellerUser.trademark || "",
+        })
+      );
       setSellerLogin(true);
       setAdminLogin(false);
       setBuyerLogin(false);
@@ -42,6 +49,7 @@ function SellerLoginCredentials() {
     } else {
       toast.error("Invalid Seller Credentials, Try Again!");
     }
+    console.log("Matching seller:", sellerUser);
   };
 
   return (

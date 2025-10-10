@@ -34,6 +34,9 @@ function AllLatchableProducts() {
     setLatchProduct(product); // store product for modal
   };
 
+  // ------------------------------------------------------------------
+  //  ✅ CORRECTED FUNCTION: Include seller details in the product object
+  // ------------------------------------------------------------------
   const handleLatch = (product, quantity, price) => {
     const loggedInSeller = JSON.parse(localStorage.getItem("loggedInSeller"));
     if (!loggedInSeller) return alert("No seller logged in!");
@@ -41,8 +44,9 @@ function AllLatchableProducts() {
     const storageKey = `latchedProducts_${loggedInSeller.email}`;
 
     const newProduct = {
-      id: product.id || product._id || product.productId || Date.now() ,
-      prouctName: product.productName,
+      // Product Details
+      id: product.id || product._id || product.productId || Date.now(),
+      productName: product.productName, // Corrected typo: 'prouctName' -> 'productName'
       brandName: product.brandName,
       productCategory: product.productCat,
       productDescription: product.productDesc,
@@ -51,6 +55,12 @@ function AllLatchableProducts() {
       productMRP: product.mrp,
       quantity,
       price,
+
+      // ✅ SELLER PROFILE DETAILS ADDED HERE
+      // These details are necessary for the ProductDetails page to show the seller info
+      storeName: loggedInSeller.storeName,
+      email: loggedInSeller.email,
+      trademark: loggedInSeller.trademark,
     };
 
     const existing = JSON.parse(localStorage.getItem(storageKey)) || [];
@@ -60,6 +70,7 @@ function AllLatchableProducts() {
     setLatchedProducts(updated);
     setLatchProduct(null);
   };
+  // ------------------------------------------------------------------
 
   return (
     <div>
@@ -168,9 +179,6 @@ function AllLatchableProducts() {
           onClose={() => setLatchProduct(null)}
         />
       )}
-
-      {/* Latched Products */}
-      {/* <LatchedProducts /> */}
     </div>
   );
 }

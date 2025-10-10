@@ -1,10 +1,49 @@
-import React, { useState } from "react";
-import { ChevronDown } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { ChevronDown, ShoppingCart } from "lucide-react"; // Imported ShoppingCart icon
 import { useNavigate } from "react-router-dom";
+
+// Key for storing the cart in localStorage (must match the key used in ProductDetails)
+const CART_STORAGE_KEY = "buyerCartItems";
 
 function BuyerHeader() {
   const navigate = useNavigate();
-  const [openDropdown, setOpenDropdown] = useState(null); // Track which dropdown is open
+  const [openDropdown, setOpenDropdown] = useState(null);
+  // State to hold the current number of items in the cart
+  const [cartItemCount, setCartItemCount] = useState(0);
+
+  // Function to read the cart count from localStorage
+  const getCartCount = () => {
+    try {
+      const storedCart = localStorage.getItem(CART_STORAGE_KEY);
+      const items = storedCart ? JSON.parse(storedCart) : [];
+      setCartItemCount(items.length);
+    } catch (e) {
+      console.error("Error reading cart from localStorage:", e);
+      setCartItemCount(0);
+    }
+  };
+
+  // Listen for changes in localStorage (e.g., when an item is added)
+  // This uses a Window event listener, which is the standard way to communicate
+  // changes across tabs/components when relying purely on localStorage.
+  useEffect(() => {
+    getCartCount();
+
+    // Event listener to update cart count whenever localStorage changes
+    const handleStorageChange = () => {
+      getCartCount();
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+    // Use an interval to periodically check if the storage key exists (fallback)
+    const interval = setInterval(getCartCount, 1000);
+
+    // Cleanup function
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+      clearInterval(interval);
+    };
+  }, []); // Run only on mount
 
   const handleDropdown = (menu) => {
     setOpenDropdown(openDropdown === menu ? null : menu);
@@ -20,6 +59,11 @@ function BuyerHeader() {
     navigate("/viewAllProducts");
   };
 
+  // Function to navigate to the Cart page
+  const goToCart = () => {
+    navigate("/cart"); // Ensure you have a route configured for '/cart'
+  };
+
   return (
     <header className="bg-gradient-to-r from-orange-500 to-yellow-400 shadow-md relative z-50">
       <div className="container mx-auto px-6 py-3 flex justify-between items-center">
@@ -29,7 +73,8 @@ function BuyerHeader() {
         </div>
 
         {/* Nav Links */}
-        <nav className="flex space-x-8 text-white font-medium items-center relative">
+        {/* Added extra space for the cart icon */}
+        <nav className="flex space-x-6 text-white font-medium items-center relative">
           {/* Products Dropdown */}
           <div
             className="relative"
@@ -107,6 +152,21 @@ function BuyerHeader() {
               </div>
             )}
           </div>
+
+          {/* ✅ NEW: Cart Icon Button */}
+          <button
+            onClick={goToCart}
+            className="relative p-2 hover:bg-yellow-500/20 rounded-full transition focus:outline-none"
+            aria-label={`Shopping Cart with ${cartItemCount} items`}
+          >
+            <ShoppingCart size={24} />
+            {/* Cart Count Badge */}
+            {cartItemCount > 0 && (
+              <span className="absolute top-0 right-0 transform translate-x-1 -translate-y-1 bg-red-600 text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full border-2 border-orange-500">
+                {cartItemCount}
+              </span>
+            )}
+          </button>
 
           {/* Sign Out Button */}
           <button

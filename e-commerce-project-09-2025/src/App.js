@@ -251,7 +251,7 @@ function App() {
                       }
                     />
                     <Route
-                      path="/track-your-order"
+                      path="/track-your-order/:orderId"
                       element={
                         <Suspense fallback={<Loader />}>
                           <TrackYourOrder />

@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 // Key for storing the cart in localStorage (must match the key used in ProductDetails)
 const CART_STORAGE_KEY = "buyerCartItems";
 
 function Cart() {
   const [cartItems, setCartItems] = useState([]);
+  const Navigate = useNavigate();
 
   // Function to save the current cart state back to localStorage
   const saveCartToLocalStorage = (updatedCart) => {
@@ -203,7 +204,7 @@ function Cart() {
             <button
               className="mt-6 w-full bg-green-600 text-white py-3 rounded-lg font-bold hover:bg-green-700 transition"
               onClick={() => {
-                handleProceedToCheckout;
+                handleProceedToCheckout();
               }}
             >
               Proceed to Checkout

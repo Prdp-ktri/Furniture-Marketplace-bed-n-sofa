@@ -72,6 +72,7 @@ function LoginPortal() {
       );
 
       if (buyerUser) {
+        localStorage.setItem("loggedInBuyer", JSON.stringify(buyerUser));
         toast("Welcome to Buyer Portal!");
         navigate("/buyerDashboard");
         setBuyerLogin(true);

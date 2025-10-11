@@ -64,6 +64,10 @@ function BuyerHeader() {
     navigate("/cart"); // Ensure you have a route configured for '/cart'
   };
 
+  const trackyourorder = () => {
+    navigate("/track-your-order");
+  };
+
   return (
     <header className="bg-gradient-to-r from-orange-500 to-yellow-400 shadow-md relative z-50">
       <div className="container mx-auto px-6 py-3 flex justify-between items-center">
@@ -115,18 +119,18 @@ function BuyerHeader() {
             </button>
             {openDropdown === "delivery" && (
               <div className="absolute left-0 mt-2 w-52 bg-white text-gray-800 rounded-md shadow-lg transition-all duration-200">
-                <a
-                  href="#"
+                <button
+                  onClick={trackyourorder}
                   className="block px-4 py-2 hover:bg-yellow-100 rounded-t-md"
                 >
                   Track Your Order
-                </a>
-                <a
+                </button>
+                <button
                   href="#"
                   className="block px-4 py-2 hover:bg-yellow-100 rounded-b-md"
                 >
                   Delivered Orders
-                </a>
+                </button>
               </div>
             )}
           </div>

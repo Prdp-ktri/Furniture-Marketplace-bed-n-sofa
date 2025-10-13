@@ -27,6 +27,10 @@ import ProductDetails from "./modules/buyer/ProductDetails";
 import Cart from "./modules/buyer/Cart";
 import PlaceOrder from "./modules/buyer/PlaceOrder";
 import TrackYourOrder from "./modules/buyer/TrackYourOrder";
+import TrackingPage from "./modules/buyer/TrackingPage";
+import DeliveredOrders from "./modules/buyer/DeliveredOrders";
+import EditProfile from "./modules/buyer/EditProfile";
+import ViewProfile from "./modules/buyer/ViewProfile";
 
 export const AdminLoginContext = createContext();
 export const BuyerLoginContext = createContext();
@@ -255,6 +259,38 @@ function App() {
                       element={
                         <Suspense fallback={<Loader />}>
                           <TrackYourOrder />
+                        </Suspense>
+                      }
+                    />
+                    <Route
+                      path="/track-your-order"
+                      element={
+                        <Suspense fallback={<Loader />}>
+                          <TrackingPage />
+                        </Suspense>
+                      }
+                    />
+                    <Route
+                      path="/delivered"
+                      element={
+                        <Suspense fallback={<Loader />}>
+                          <DeliveredOrders />
+                        </Suspense>
+                      }
+                    />
+                    <Route
+                      path="/edit-profile"
+                      element={
+                        <Suspense fallback={<Loader />}>
+                          <EditProfile />
+                        </Suspense>
+                      }
+                    />
+                    <Route
+                      path="/view-profile"
+                      element={
+                        <Suspense fallback={<Loader />}>
+                          <ViewProfile />
                         </Suspense>
                       }
                     />

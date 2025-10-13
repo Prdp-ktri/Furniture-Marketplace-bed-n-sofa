@@ -39,7 +39,7 @@ function AdminHeader() {
             <button
               onClick={() => setProductsOpen(!isProductsOpen)}
               className="flex items-center space-x-1 px-3 py-2 rounded-md bg-gray-700 hover:bg-gray-600 transition-colors"
-            >
+            > 
               Products
             </button>
             {isProductsOpen && (

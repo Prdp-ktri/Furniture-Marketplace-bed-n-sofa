@@ -37,6 +37,7 @@ export default function BuyerLoginCredentials() {
       setAdminLogin(false);
       setSellerLogin(false);
       setLogin(true);
+      localStorage.setItem("buyer", JSON.stringify(buyerUser));
       navigate("/buyersDashboard");
     } else {
       toast("Invalid Buyer Login Credentials, Try Again!");

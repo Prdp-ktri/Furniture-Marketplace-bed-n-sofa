@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { ChevronDown, ShoppingCart } from "lucide-react"; // Imported ShoppingCart icon
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 // Key for storing the cart in localStorage (must match the key used in ProductDetails)
 const CART_STORAGE_KEY = "buyerCartItems";
@@ -66,6 +66,10 @@ function BuyerHeader() {
 
   const trackyourorder = () => {
     navigate("/track-your-order");
+  };
+
+  const editprofile = (id) => {
+    navigate(`/edit-profile/${id}`);
   };
 
   return (
@@ -147,12 +151,18 @@ function BuyerHeader() {
             </button>
             {openDropdown === "profile" && (
               <div className="absolute left-0 mt-2 w-48 bg-white text-gray-800 rounded-md shadow-lg transition-all duration-200">
-                <a
-                  href="#"
+                <Link
+                  to={"/edit-profile"}
                   className="block px-4 py-2 hover:bg-yellow-100 rounded-md"
                 >
                   Edit Profile
-                </a>
+                </Link>
+                <Link
+                  to={"/view-profile"}
+                  className="block px-4 py-2 hover:bg-yellow-100 rounded-md"
+                >
+                  View Profile
+                </Link>
               </div>
             )}
           </div>

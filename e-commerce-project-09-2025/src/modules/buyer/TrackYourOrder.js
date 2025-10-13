@@ -35,7 +35,7 @@ function TrackYourOrder() {
       } else {
         clearInterval(interval);
       }
-    }, 4000);
+    }, 2000);
 
     return () => clearInterval(interval);
   }, [orderId, navigate]);

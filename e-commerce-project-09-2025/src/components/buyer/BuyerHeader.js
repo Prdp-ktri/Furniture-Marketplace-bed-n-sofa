@@ -62,7 +62,7 @@ function BuyerHeader() {
   const SearchProducts = (e) => {
     e.preventDefault();
     navigate("/searchProducts");
-  }
+  };
 
   // Function to navigate to the Cart page
   const goToCart = () => {

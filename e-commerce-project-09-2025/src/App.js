@@ -31,6 +31,7 @@ import TrackingPage from "./modules/buyer/TrackingPage";
 import DeliveredOrders from "./modules/buyer/DeliveredOrders";
 import EditProfile from "./modules/buyer/EditProfile";
 import ViewProfile from "./modules/buyer/ViewProfile";
+import SearchProducts from "./modules/buyer/SearchProducts";
 
 export const AdminLoginContext = createContext();
 export const BuyerLoginContext = createContext();
@@ -227,6 +228,14 @@ function App() {
                       element={
                         <Suspense fallback={<Loader />}>
                           <ViewAllProducts />
+                        </Suspense>
+                      }
+                    />
+                    <Route
+                      path="/searchProducts"
+                      element={
+                        <Suspense fallback={<Loader />}>
+                          <SearchProducts />
                         </Suspense>
                       }
                     />

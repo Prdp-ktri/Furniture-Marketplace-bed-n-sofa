@@ -59,6 +59,11 @@ function BuyerHeader() {
     navigate("/viewAllProducts");
   };
 
+  const SearchProducts = (e) => {
+    e.preventDefault();
+    navigate("/searchProducts");
+  }
+
   // Function to navigate to the Cart page
   const goToCart = () => {
     navigate("/cart"); // Ensure you have a route configured for '/cart'
@@ -95,12 +100,12 @@ function BuyerHeader() {
             </button>
             {openDropdown === "products" && (
               <div className="absolute left-0 mt-2 w-48 bg-white text-gray-800 rounded-md shadow-lg transition-all duration-200">
-                <a
-                  href="#"
+                <button
+                  onClick={SearchProducts}
                   className="block px-4 py-2 hover:bg-yellow-100 rounded-t-md"
                 >
                   Search Products
-                </a>
+                </button>
                 <button
                   onClick={ViewAllProducts}
                   className="block w-full text-left px-4 py-2 hover:bg-yellow-100 rounded-b-md"

@@ -216,7 +216,7 @@ function App() {
                       }
                     />
                     <Route
-                      path="/buyerDashboard"
+                      path="/buyersDashboard"
                       element={
                         <Suspense fallback={<Loader />}>
                           <BuyerDashboard />

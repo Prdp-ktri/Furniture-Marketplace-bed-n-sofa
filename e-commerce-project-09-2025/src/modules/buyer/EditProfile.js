@@ -10,23 +10,18 @@ function EditProfile() {
   const [address, setAddress] = useState("");
   const [selectedState, setSelectedState] = useState("");
   const [pin, setPin] = useState("");
-  const { id } = useParams(); // unique buyer ID from the route
+  const { id } = useParams();
   const navigate = useNavigate();
-  const [buyer, setBuyer] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [message, setMessage] = useState("");
 
-  // Fetch buyer data on mount
+  // Fetch buyer data
   useEffect(() => {
     fetch("http://localhost:5000/buyers/" + id)
       .then((res) => {
-        if (!res.ok) {
-          throw new Error("Failed to fetch Buyer Profile with ID" + id);
-        }
+        if (!res.ok) throw new Error("Failed to fetch profile!");
         return res.json();
       })
       .then((data) => {
-        if (!data) throw new Error("No Profile found");
         setName(data.name);
         setAge(data.age);
         setEmail(data.email);
@@ -39,16 +34,9 @@ function EditProfile() {
       .finally(() => setLoading(false));
   }, [id]);
 
-  // Handle input change
-  // const handleChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setBuyer({ ...buyer, [name]: value });
-  // };
-
-  // Handle form submission
   const handleUpdatedProfile = (e) => {
     e.preventDefault();
-    let updatedProfile = {
+    const updatedProfile = {
       name,
       age,
       email,
@@ -57,149 +45,107 @@ function EditProfile() {
       selectedState,
       pin,
     };
-    console.log(updatedProfile);
 
     fetch("http://localhost:5000/buyers/" + id, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(updatedProfile),
-    }).then((res) => {
-      if (res) {
-        toast("Updated Profile...!");
-        navigate("/view-profile");
-      }
-    });
+    })
+      .then((res) => {
+        if (res.ok) {
+          toast.success("✅ Profile Updated Successfully!");
+          navigate("/view-profile");
+        }
+      })
+      .catch((err) => toast.error(err.message));
   };
 
   if (loading)
     return <p className="p-8 text-center text-gray-600">Loading...</p>;
-  if (!buyer)
-    return (
-      <p className="p-8 text-center text-red-500">
-        Buyer not found. Please check your ID.
-      </p>
-    );
 
   return (
-    <div className="p-8 bg-gray-50 min-h-screen flex justify-center items-center">
-      <div className="bg-white shadow-lg rounded-xl p-8 w-full max-w-lg border-t-4 border-teal-500">
+    <div className="min-h-screen bg-gradient-to-br from-teal-50 to-yellow-50 flex items-center justify-center p-6">
+      <div className="bg-white shadow-2xl rounded-2xl p-8 max-w-2xl w-full border-t-4 border-teal-500">
         <h1 className="text-3xl font-bold text-teal-700 mb-6 text-center">
           Edit Your Profile
         </h1>
 
-        {message && (
-          <p
-            className={`text-center mb-4 font-medium ${
-              message.includes("✅") ? "text-green-600" : "text-red-500"
-            }`}
-          >
-            {message}
-          </p>
-        )}
+        <form onSubmit={handleUpdatedProfile} className="space-y-6">
+          {/* Personal Info */}
+          <div>
+            <h2 className="text-xl font-semibold text-orange-800 mb-4">
+              Personal Information
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <input
+                type="text"
+                placeholder="Full Name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="p-3 border rounded-lg focus:ring-2 focus:ring-teal-400 focus:outline-none w-full"
+              />
+              <input
+                type="number"
+                placeholder="Age"
+                value={age}
+                onChange={(e) => setAge(e.target.value)}
+                className="p-3 border rounded-lg focus:ring-2 focus:ring-teal-400 focus:outline-none w-full"
+              />
+              <input
+                type="email"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="p-3 border rounded-lg focus:ring-2 focus:ring-teal-400 focus:outline-none w-full"
+              />
+              <input
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="p-3 border rounded-lg focus:ring-2 focus:ring-teal-400 focus:outline-none w-full"
+              />
+            </div>
+          </div>
 
-        <form onSubmit={handleUpdatedProfile} className="space-y-4">
-          <h2 className="text-2xl font-semibold mb-6 text-orange-800">
-            Edit Profile
-          </h2>
-          <div className="overflow-x-auto">
-            <table className="w-full border-collapse text-sm md:text-base">
-              <thead>
-                <tr className="bg-orange-100 text-orange-700">
-                  <th className="px-4 py-3 text-left border">Profile ID</th>
-                  <th className="px-4 py-3 text-left border">Name</th>
-                  <th className="px-4 py-3 text-left border">Age</th>
-                  <th className="px-4 py-3 text-left border">Email</th>
-                  <th className="px-4 py-3 text-left border">Password</th>
-                  <th className="px-4 py-3 text-left border">Address</th>
-                  <th className="px-4 py-3 text-left border">Selected State</th>
-                  <th className="px-4 py-3 text-left border">PIN</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr className="hover:bg-orange-400">
-                  <td className="px-4 py-2 border text-orange-800 italic">
-                    Auto
-                  </td>
-                  <td className="px-4 py-2 border">
-                    <input
-                      type="text"
-                      value={name}
-                      id="nameInp"
-                      onChange={(e) => {
-                        setName(e.target.value);
-                      }}
-                      className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-400"
-                    />
-                  </td>
-                  <td className="px-4 py-2 border">
-                    <input
-                      type="number"
-                      value={age}
-                      id=""
-                      onChange={(e) => {
-                        setAge(e.target.value);
-                      }}
-                      className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-400"
-                    />
-                  </td>
-                  <td className="px-4 py-2 border">
-                    <input
-                      type="number"
-                      value={email}
-                      id=""
-                      onChange={(e) => {
-                        setEmail(e.target.value);
-                      }}
-                      className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-400"
-                    />
-                  </td>
-                  <td className="px-4 py-2 border">
-                    <input
-                      type="number"
-                      value={password}
-                      id=""
-                      onChange={(e) => {
-                        setPassword(e.target.value);
-                      }}
-                      className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-400"
-                    />
-                  </td>
-                  <td className="px-4 py-2 border">
-                    <input
-                      type="number"
-                      value={address}
-                      id=""
-                      onChange={(e) => {
-                        setAddress(e.target.value);
-                      }}
-                      className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-400"
-                    />
-                  </td>
-                  <td className="px-4 py-2 border">
-                    <input
-                      type="number"
-                      value={selectedState}
-                      id=""
-                      onChange={(e) => {
-                        setSelectedState(e.target.value);
-                      }}
-                      className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-400"
-                    />
-                  </td>
-                  <td className="px-4 py-2 border">
-                    <input
-                      type="number"
-                      value={pin}
-                      id=""
-                      onChange={(e) => {
-                        setPin(e.target.value);
-                      }}
-                      className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-400"
-                    />
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+          {/* Address Info */}
+          <div>
+            <h2 className="text-xl font-semibold text-orange-800 mb-4">
+              Address
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <input
+                type="text"
+                placeholder="Address"
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
+                className="p-3 border rounded-lg focus:ring-2 focus:ring-teal-400 focus:outline-none w-full"
+              />
+              <input
+                type="text"
+                placeholder="State"
+                value={selectedState}
+                onChange={(e) => setSelectedState(e.target.value)}
+                className="p-3 border rounded-lg focus:ring-2 focus:ring-teal-400 focus:outline-none w-full"
+              />
+              <input
+                type="number"
+                placeholder="PIN Code"
+                value={pin}
+                onChange={(e) => setPin(e.target.value)}
+                className="p-3 border rounded-lg focus:ring-2 focus:ring-teal-400 focus:outline-none w-full"
+              />
+            </div>
+          </div>
+
+          {/* Submit Button */}
+          <div className="text-center">
+            <button
+              type="submit"
+              className="px-6 py-3 bg-teal-500 text-white font-semibold rounded-lg shadow-md hover:bg-teal-600 transition duration-300"
+            >
+              Update Profile
+            </button>
           </div>
         </form>
       </div>

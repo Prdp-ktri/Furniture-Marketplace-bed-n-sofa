@@ -1,41 +1,6 @@
 {
   "buyers": [
     {
-      "email": "akashmodi@gmail.com",
-      "password": "akashmodi@buyer",
-      "id": "d589"
-    },
-    {
-      "id": "856a",
-      "name": "Kahish Nahar",
-      "age": "29",
-      "email": "kashishnahar@gmail.com",
-      "password": "KN@buyer",
-      "address": "Bengali Gali, Kutchery Road, Ajmer",
-      "selectedState": "RJ",
-      "pin": "305001"
-    },
-    {
-      "id": "77cf",
-      "name": "Ashish Parashar",
-      "age": "27",
-      "email": "ashishparashar@yahoo.com",
-      "password": "AP@buyer",
-      "address": "Pushkar, Ajmer",
-      "selectedState": "RJ",
-      "pin": "305022"
-    },
-    {
-      "id": "d9a2",
-      "name": "Pradeep Khatri",
-      "age": "25",
-      "email": "gokulvaasi@gmail.com",
-      "password": "PK08@gokulvaasi",
-      "address": "Pushkar",
-      "selectedState": "RJ",
-      "pin": "305022"
-    },
-    {
       "id": "9d19",
       "name": "Lokesh Modi",
       "age": "37",

@@ -55,11 +55,12 @@ function LoginPortal() {
         toast("Invalid Admin Login Credentials, Enter Again!");
       }
     } else if (role === "seller") {
-      let sellerUser = datas.find(
+      const sellerUser = datas.find(
         (v) => v.email === email && v.password === password
       );
 
       if (sellerUser) {
+        localStorage.setItem("loggedInSeller", JSON.stringify(sellerUser));
         toast("Welcome to the Seller Dashboard!");
         navigate("/sellerDashboard");
         setSellerLogin(true);

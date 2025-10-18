@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 // LocalStorage Keys
 const BUYER_PROFILE_KEY = "loggedInBuyer";
 const CART_STORAGE_KEY = "buyerCartItems";
+const SELLER_ORDERS_KEY = "sellerOrders"; // 🆕 for storing seller orders
 
 // 🆕 CONSTANT FOR INDIAN STATES/UTs
 const INDIAN_STATES = [
@@ -89,13 +90,10 @@ function PlaceOrder() {
         );
 
         if (currentBuyer) {
-          // Extract data
           const fetchedAddress = currentBuyer.address || "";
           const fetchedPin = currentBuyer.pin || "";
-          // Handle both code or full name from backend
           let fetchedStateCode = currentBuyer.state || "";
 
-          // If backend gives full name, convert it to matching code
           const foundState = INDIAN_STATES.find(
             (s) =>
               s.code.toLowerCase() === fetchedStateCode.toLowerCase() ||
@@ -103,13 +101,11 @@ function PlaceOrder() {
           );
           fetchedStateCode = foundState ? foundState.code : "";
 
-          // Update buyer display info
           setBuyerName(currentBuyer.name || "Buyer");
           setBuyerAddress(fetchedAddress);
           setBuyerPin(fetchedPin);
           setBuyerState(fetchedStateCode);
 
-          // Update editable fields
           setEditedAddress(fetchedAddress);
           setEditedPin(fetchedPin);
           setEditedState(fetchedStateCode);
@@ -143,13 +139,9 @@ function PlaceOrder() {
       return;
     }
 
-    // Update main display info
     setBuyerAddress(editedAddress);
     setBuyerPin(editedPin);
     setBuyerState(editedState);
-
-    // (Optional) Update backend here with PUT/PATCH
-
     setIsEditing(false);
     alert("Address, PIN, and State updated successfully (local update only).");
   };
@@ -162,6 +154,7 @@ function PlaceOrder() {
     setIsEditing(false);
   };
 
+  // ✅ Handle placing the order
   const handlePlaceOrder = () => {
     if (!paymentMethod) {
       alert("Please select a payment method.");
@@ -182,50 +175,71 @@ function PlaceOrder() {
 
     setIsProcessing(true);
 
-    console.log(
-      "Placing order with address:",
-      buyerAddress,
-      "PIN:",
-      buyerPin,
-      "State Code:",
-      buyerState
-    );
-
     setTimeout(() => {
-      // 🆕 Generate unique Order ID
       const orderId = "ORD" + Date.now();
-
-      // 🆕 Get ordered items from cart
       const storedCart =
         JSON.parse(localStorage.getItem(CART_STORAGE_KEY)) || [];
+      const loggedInBuyer = JSON.parse(localStorage.getItem(BUYER_PROFILE_KEY));
 
-      // 🆕 Prepare order object
+      // 🆕 Prepare buyer's order
       const newOrder = {
         orderId,
         buyerName,
+        buyerEmail: loggedInBuyer.email,
         address: buyerAddress,
         pin: buyerPin,
         state: getFullStateName(buyerState),
         paymentMethod,
         totalCost,
         items: storedCart,
-        status: "Order Placed", // initial status
+        status: "Order Placed",
         placedAt: new Date().toLocaleString(),
       };
 
-      // 🆕 Save order to localStorage (simulating DB)
+      // 🆕 Save to buyer orders
       const existingOrders =
         JSON.parse(localStorage.getItem("buyerOrders")) || [];
       existingOrders.push(newOrder);
       localStorage.setItem("buyerOrders", JSON.stringify(existingOrders));
 
-      // Clear cart
+      // 🆕 Also assign to seller orders
+      const sellerOrders =
+        JSON.parse(localStorage.getItem(SELLER_ORDERS_KEY)) || {};
+
+      storedCart.forEach((item) => {
+        const sellerName = item.sellerName || item.storeName;
+        if (!sellerName) return;
+
+        if (!sellerOrders[sellerName]) {
+          sellerOrders[sellerName] = [];
+        }
+
+        const sellerOrder = {
+          orderId,
+          buyerName,
+          buyerEmail: loggedInBuyer.email,
+          address: buyerAddress,
+          pin: buyerPin,
+          state: getFullStateName(buyerState),
+          totalCost,
+          paymentMethod,
+          items: storedCart.filter(
+            (p) => p.sellerName === sellerName || p.storeName === sellerName
+          ),
+          status: "New",
+          placedAt: new Date().toLocaleString(),
+        };
+
+        sellerOrders[sellerName].push(sellerOrder);
+      });
+
+      localStorage.setItem(SELLER_ORDERS_KEY, JSON.stringify(sellerOrders));
+
+      // Clear cart and finish up
       localStorage.removeItem(CART_STORAGE_KEY);
       setIsProcessing(false);
 
       alert(`Order placed successfully! Your Order ID: ${orderId}`);
-
-      // 🧭 Navigate to track order page
       navigate(`/track-your-order/${orderId}`);
     }, 2000);
   };
@@ -252,7 +266,7 @@ function PlaceOrder() {
               <div className="space-x-2">
                 <button
                   onClick={handleSaveAddress}
-                  className="text-sm text-green-600 font-medium hover:underline disabled:opacity-50"
+                  className="text-sm text-green-600 font-medium hover:underline"
                   disabled={
                     !editedAddress.trim() ||
                     !editedPin.trim() ||

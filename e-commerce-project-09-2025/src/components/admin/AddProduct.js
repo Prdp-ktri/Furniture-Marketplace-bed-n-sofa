@@ -12,19 +12,6 @@ function AddProduct() {
   const [mrp, setMrp] = useState(0);
   const navigate = useNavigate();
 
-  // const handleImageUpload = (e) => {
-  //   const files = Array.from(e.target.files);
-  //   console.log(files);
-
-  //   if (files.length > 6) {
-  //     toast.error("You can upload a maximum of 6 images.");
-  //     return;
-  //   }
-
-  //   const urls = files.map((file) => URL.createObjectURL(file));
-  //   setProductImgs(urls);
-  // };
-
   const addProduct = (e) => {
     e.preventDefault();
 

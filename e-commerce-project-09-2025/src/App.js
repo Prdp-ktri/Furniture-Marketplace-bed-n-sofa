@@ -32,6 +32,10 @@ import DeliveredOrders from "./modules/buyer/DeliveredOrders";
 import EditProfile from "./modules/buyer/EditProfile";
 import ViewProfile from "./modules/buyer/ViewProfile";
 import SearchProducts from "./modules/buyer/SearchProducts";
+import ManageProfile from "./modules/seller/ManageProfile";
+import NewOrders from "./modules/seller/NewOrders";
+import AllSellersList from "./components/admin/AllSellersList";
+import AllBuyersList from "./components/admin/AllBuyersList";
 
 export const AdminLoginContext = createContext();
 export const BuyerLoginContext = createContext();
@@ -197,6 +201,22 @@ function App() {
                         </Suspense>
                       }
                     />
+                    <Route
+                      path="/full-seller-list"
+                      element={
+                        <Suspense fallback={<Loader />}>
+                          <AllSellersList />
+                        </Suspense>
+                      }
+                    />
+                    <Route
+                      path="/full-buyers-list"
+                      element={
+                        <Suspense fallback={<Loader />}>
+                          <AllBuyersList />
+                        </Suspense>
+                      }
+                    />
 
                     {/* Buyer */}
                     <Route
@@ -216,7 +236,7 @@ function App() {
                       }
                     />
                     <Route
-                      path="/buyersDashboard"
+                      path="/buyerDashboard"
                       element={
                         <Suspense fallback={<Loader />}>
                           <BuyerDashboard />
@@ -280,7 +300,7 @@ function App() {
                       }
                     />
                     <Route
-                      path="/delivered"
+                      path="/deliveredorders"
                       element={
                         <Suspense fallback={<Loader />}>
                           <DeliveredOrders />
@@ -326,6 +346,22 @@ function App() {
                       element={
                         <Suspense fallback={<Loader />}>
                           <SellerDashboard />
+                        </Suspense>
+                      }
+                    />
+                    <Route
+                      path="/manage-profile"
+                      element={
+                        <Suspense fallback={<Loader />}>
+                          <ManageProfile />
+                        </Suspense>
+                      }
+                    />
+                    <Route
+                      path="/new-orders-of-seller"
+                      element={
+                        <Suspense fallback={<Loader />}>
+                          <NewOrders />
                         </Suspense>
                       }
                     />

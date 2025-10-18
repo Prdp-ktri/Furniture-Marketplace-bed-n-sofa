@@ -45,9 +45,9 @@ function BuyerHeader() {
     };
   }, []); // Run only on mount
 
-  const handleDropdown = (menu) => {
-    setOpenDropdown(openDropdown === menu ? null : menu);
-  };
+  // const handleDropdown = (menu) => {
+  //   setOpenDropdown(openDropdown === menu ? null : menu);
+  // };
 
   const SignOut = (e) => {
     e.preventDefault();
@@ -73,9 +73,13 @@ function BuyerHeader() {
     navigate("/track-your-order");
   };
 
-  const editprofile = (id) => {
-    navigate(`/edit-profile/${id}`);
+  const deliveredOrders = () => {
+    navigate("/deliveredorders");
   };
+
+  // const editprofile = (id) => {
+  //   navigate(`/edit-profile/${id}`);
+  // };
 
   return (
     <header className="bg-gradient-to-r from-orange-500 to-yellow-400 shadow-md relative z-50">
@@ -135,7 +139,7 @@ function BuyerHeader() {
                   Track Your Order
                 </button>
                 <button
-                  href="#"
+                  onClick={deliveredOrders}
                   className="block px-4 py-2 hover:bg-yellow-100 rounded-b-md"
                 >
                   Delivered Orders

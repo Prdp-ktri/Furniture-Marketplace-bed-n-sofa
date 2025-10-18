@@ -29,6 +29,16 @@ function SellerHeader() {
     navigate("/sellerLogin");
   };
 
+  const manageProfile = (e) => {
+    e.preventDefault();
+    navigate("/manage-profile");
+  };
+
+  const newOrders = (e) => {
+    e.preventDefault();
+    navigate("/new-orders-of-seller")
+  }
+
   return (
     <header className="fixed top-0 left-0 w-full bg-gradient-to-r from-blue-500 via-blue-400 to-green-400 text-white shadow-md z-50">
       <div className="max-w-7xl mx-auto flex items-center justify-between px-4 py-3">
@@ -73,12 +83,12 @@ function SellerHeader() {
             </button>
             {openDropdown === "orders" && (
               <div className="absolute top-full mt-2 bg-white text-black rounded-md shadow-lg w-56">
-                <a
-                  href="#new-orders"
+                <button
+                  onClick={newOrders}
                   className="block px-4 py-2 hover:bg-gray-100"
                 >
                   New Orders
-                </a>
+                </button>
                 <a
                   href="#in-transit"
                   className="block px-4 py-2 hover:bg-gray-100"
@@ -96,9 +106,9 @@ function SellerHeader() {
           </div>
 
           {/* Manage Profile */}
-          <a href="#profile" className="hover:text-gray-200">
+          <button onClick={manageProfile} className="hover:text-gray-200">
             Manage Profile
-          </a>
+          </button>
         </nav>
 
         {/* Right-side Login / Sign Up */}

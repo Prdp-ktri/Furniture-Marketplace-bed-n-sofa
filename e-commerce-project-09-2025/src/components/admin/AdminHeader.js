@@ -15,6 +15,16 @@ function AdminHeader() {
     navigate("/");
   };
 
+  const showSellers = (e) => {
+    e.preventDefault();
+    navigate("/full-seller-list");
+  };
+
+  const showCustomers = (e) => {
+    e.preventDefault();
+    navigate("/full-buyers-list");
+  };
+
   return (
     <header className="fixed top-0 left-0 w-full z-50 bg-gradient-to-r from-indigo-500 via-sky-500 to-emerald-500 text-white shadow-md">
       <nav className="container mx-auto flex justify-around items-center px-4 py-3">
@@ -39,7 +49,7 @@ function AdminHeader() {
             <button
               onClick={() => setProductsOpen(!isProductsOpen)}
               className="flex items-center space-x-1 px-3 py-2 rounded-md bg-gray-700 hover:bg-gray-600 transition-colors"
-            > 
+            >
               Products
             </button>
             {isProductsOpen && (
@@ -67,12 +77,18 @@ function AdminHeader() {
             </button>
             {isProfilesOpen && (
               <ul className="absolute bg-white text-gray-800 mt-2 rounded-lg shadow-lg w-40 animate-fade-in">
-                <li className="px-4 py-2 hover:bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% cursor-pointer">
-                  Seller
-                </li>
-                <li className="px-4 py-2 hover:bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% cursor-pointer">
-                  Customer
-                </li>
+                <button
+                  className="px-4 py-2 hover:bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% cursor-pointer"
+                  onClick={showSellers}
+                >
+                  Sellers
+                </button>
+                <button
+                  className="px-4 py-2 hover:bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% cursor-pointer"
+                  onClick={showCustomers}
+                >
+                  Buyers
+                </button>
               </ul>
             )}
           </li>

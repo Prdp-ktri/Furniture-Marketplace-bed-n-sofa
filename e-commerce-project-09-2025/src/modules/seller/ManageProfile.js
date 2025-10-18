@@ -2,42 +2,45 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-function EditProfile() {
-  const [buyerId, setBuyerId] = useState(null);
+function ManageProfile() {
   const [name, setName] = useState("");
-  const [age, setAge] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [address, setAddress] = useState("");
   const [selectedState, setSelectedState] = useState("");
   const [pin, setPin] = useState("");
-  const navigate = useNavigate();
+  const [storeName, setStoreName] = useState("");
+  const [gst, setGst] = useState("");
+  const [trademark, setTrademark] = useState("");
   const [loading, setLoading] = useState(true);
 
-  // Fetch buyer data
+  const navigate = useNavigate();
+
   useEffect(() => {
-    const storedBuyer = JSON.parse(localStorage.getItem("loggedInBuyer"));
-    if (!storedBuyer) {
-      toast.error("Please log in to Edit your profile!");
+    // ✅ Get the logged-in seller from localStorage
+    const storedSeller = JSON.parse(localStorage.getItem("loggedInSeller"));
+    if (!storedSeller || !storedSeller.id) {
+      toast.error("⚠️ Seller not found! Please log in again.");
       navigate("/login");
       return;
     }
 
-    setBuyerId(storedBuyer.id);
-
-    fetch("http://localhost:5000/buyers/" + storedBuyer.id)
+    // ✅ Fetch seller data by ID from backend
+    fetch(`http://localhost:7000/sellers/${storedSeller.id}`)
       .then((res) => {
         if (!res.ok) throw new Error("Failed to fetch profile!");
         return res.json();
       })
       .then((data) => {
         setName(data.name || "");
-        setAge(data.age || "");
         setEmail(data.email || "");
         setPassword(data.password || "");
         setAddress(data.address || "");
         setSelectedState(data.selectedState || "");
         setPin(data.pin || "");
+        setStoreName(data.storeName || "");
+        setGst(data.gst || "");
+        setTrademark(data.trademark || "");
       })
       .catch((err) => toast.error(err.message))
       .finally(() => setLoading(false));
@@ -45,32 +48,49 @@ function EditProfile() {
 
   const handleUpdatedProfile = (e) => {
     e.preventDefault();
+
+    const storedSeller = JSON.parse(localStorage.getItem("loggedInSeller"));
+    if (!storedSeller || !storedSeller.id) {
+      toast.error("⚠️ Cannot update profile — Seller ID not found!");
+      return;
+    }
+
     const updatedProfile = {
+      id: storedSeller.id,
       name,
-      age,
       email,
       password,
       address,
       selectedState,
       pin,
+      storeName,
+      gst,
+      trademark,
     };
 
-    fetch("http://localhost:5000/buyers/" + buyerId, {
+    fetch(`http://localhost:7000/sellers/${storedSeller.id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(updatedProfile),
     })
       .then((res) => {
         if (res.ok) {
+          localStorage.setItem(
+            "loggedInSeller",
+            JSON.stringify(updatedProfile)
+          );
           toast.success("✅ Profile Updated Successfully!");
-          navigate("/view-profile");
+          navigate("/sellerDashboard");
+        } else {
+          throw new Error("Failed to update profile!");
         }
       })
       .catch((err) => toast.error(err.message));
   };
 
-  if (loading)
+  if (loading) {
     return <p className="p-8 text-center text-gray-600">Loading...</p>;
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-teal-50 to-yellow-50 flex items-center justify-center p-6">
@@ -80,10 +100,9 @@ function EditProfile() {
         </h1>
 
         <form onSubmit={handleUpdatedProfile} className="space-y-6">
-          {/* Personal Info */}
           <div>
             <h2 className="text-xl font-semibold text-orange-800 mb-4">
-              Personal Information
+              Seller Information
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <input
@@ -91,13 +110,6 @@ function EditProfile() {
                 placeholder="Full Name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="p-3 border rounded-lg focus:ring-2 focus:ring-teal-400 focus:outline-none w-full"
-              />
-              <input
-                type="number"
-                placeholder="Age"
-                value={age}
-                onChange={(e) => setAge(e.target.value)}
                 className="p-3 border rounded-lg focus:ring-2 focus:ring-teal-400 focus:outline-none w-full"
               />
               <input
@@ -114,15 +126,6 @@ function EditProfile() {
                 onChange={(e) => setPassword(e.target.value)}
                 className="p-3 border rounded-lg focus:ring-2 focus:ring-teal-400 focus:outline-none w-full"
               />
-            </div>
-          </div>
-
-          {/* Address Info */}
-          <div>
-            <h2 className="text-xl font-semibold text-orange-800 mb-4">
-              Address
-            </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <input
                 type="text"
                 placeholder="Address"
@@ -132,22 +135,42 @@ function EditProfile() {
               />
               <input
                 type="text"
-                placeholder="State"
+                placeholder="State (e.g. RJ)"
                 value={selectedState}
                 onChange={(e) => setSelectedState(e.target.value)}
                 className="p-3 border rounded-lg focus:ring-2 focus:ring-teal-400 focus:outline-none w-full"
               />
               <input
-                type="number"
+                type="text"
                 placeholder="PIN Code"
                 value={pin}
                 onChange={(e) => setPin(e.target.value)}
                 className="p-3 border rounded-lg focus:ring-2 focus:ring-teal-400 focus:outline-none w-full"
               />
+              <input
+                type="text"
+                placeholder="Store Name"
+                value={storeName}
+                onChange={(e) => setStoreName(e.target.value)}
+                className="p-3 border rounded-lg focus:ring-2 focus:ring-teal-400 focus:outline-none w-full"
+              />
+              <input
+                type="text"
+                placeholder="GST Number"
+                value={gst}
+                onChange={(e) => setGst(e.target.value)}
+                className="p-3 border rounded-lg focus:ring-2 focus:ring-teal-400 focus:outline-none w-full"
+              />
+              <input
+                type="text"
+                placeholder="Trademark Number"
+                value={trademark}
+                onChange={(e) => setTrademark(e.target.value)}
+                className="p-3 border rounded-lg focus:ring-2 focus:ring-teal-400 focus:outline-none w-full"
+              />
             </div>
           </div>
 
-          {/* Submit Button */}
           <div className="text-center">
             <button
               type="submit"
@@ -162,4 +185,4 @@ function EditProfile() {
   );
 }
 
-export default EditProfile;
+export default ManageProfile;

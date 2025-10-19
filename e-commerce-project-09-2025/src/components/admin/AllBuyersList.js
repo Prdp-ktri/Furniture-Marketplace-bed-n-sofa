@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Trash2, User, Mail, MapPin, Home } from "lucide-react";
+import { Trash2, User, Mail, MapPin, Home, Phone } from "lucide-react";
 
 function AllBuyersList() {
   const [buyers, setBuyers] = useState([]);
@@ -34,7 +34,7 @@ function AllBuyersList() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-50 to-cyan-50 pt-28 p-8">
-      <div className="max-w-6xl mx-auto bg-white shadow-2xl rounded-3xl p-8">
+      <div className="max-w-8xl mx-auto bg-white shadow-2xl rounded-3xl p-8">
         <h1 className="text-4xl font-extrabold text-indigo-700 mb-6 text-center">
           👥 All Registered Buyers
         </h1>
@@ -55,6 +55,7 @@ function AllBuyersList() {
                   <th className="py-3 px-4 text-left font-semibold">Name</th>
                   <th className="py-3 px-4 text-left font-semibold">Age</th>
                   <th className="py-3 px-4 text-left font-semibold">Email</th>
+                  <th className="py-3 px-4 text-left font-semibold">Phone</th>
                   <th className="py-3 px-4 text-left font-semibold">Address</th>
                   <th className="py-3 px-4 text-left font-semibold">State</th>
                   <th className="py-3 px-4 text-left font-semibold">PIN</th>
@@ -89,6 +90,14 @@ function AllBuyersList() {
                       </div>
                     </td>
 
+                    {/* Phone */}
+                    <td className="py-3 px-4 text-gray-700">
+                      <div className="flex items-center gap-2">
+                        <Phone className="text-cyan-500 w-4 h-4" />
+                        <span>{b.phone}</span>
+                      </div>
+                    </td>
+
                     {/* Address */}
                     <td className="py-3 px-4 flex items-center gap-2 text-gray-700">
                       <Home className="text-amber-600 w-4 h-4" />
@@ -97,7 +106,7 @@ function AllBuyersList() {
 
                     {/* State */}
                     <td className="py-3 px-4 text-gray-700">
-                      {b.state || "—"}
+                      {b.selectedState || "—"}
                     </td>
 
                     {/* PIN */}

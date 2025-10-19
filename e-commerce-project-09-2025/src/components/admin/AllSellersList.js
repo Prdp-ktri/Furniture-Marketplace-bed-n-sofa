@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Trash2, Store, Mail, BadgePercent } from "lucide-react"; // icons
+import { Trash2, Store, Mail, BadgePercent, Phone } from "lucide-react"; // icons
 
 function AllSellersList() {
   const [sellers, setSellers] = useState([]);
@@ -34,7 +34,7 @@ function AllSellersList() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-teal-50 to-yellow-50 pt-28 p-8">
-      <div className="max-w-6xl mx-auto bg-white shadow-2xl rounded-3xl p-8">
+      <div className="max-w-8xl mx-auto bg-white shadow-2xl rounded-3xl p-8">
         <h1 className="text-4xl font-extrabold text-teal-700 mb-6 text-center">
           🏪 All Registered Sellers
         </h1>
@@ -56,6 +56,7 @@ function AllSellersList() {
                     Store Name
                   </th>
                   <th className="py-3 px-4 text-left font-semibold">Email</th>
+                  <th className="py-3 px-4 text-left font-semibold">Phone</th>
                   <th className="py-3 px-4 text-left font-semibold">Address</th>
                   <th className="py-3 px-4 text-left font-semibold">State</th>
                   <th className="py-3 px-4 text-left font-semibold">GST No.</th>
@@ -87,6 +88,14 @@ function AllSellersList() {
                       <div className="flex items-center gap-2">
                         <Mail className="text-orange-500 w-4 h-4" />
                         <span>{v.email}</span>
+                      </div>
+                    </td>
+
+                    {/* Phone */}
+                    <td className="py-3 px-4 text-gray-700">
+                      <div className="flex items-center gap-2">
+                        <Phone className="text-orange-500 w-4 h-4" />
+                        <span>{v.phone}</span>
                       </div>
                     </td>
 

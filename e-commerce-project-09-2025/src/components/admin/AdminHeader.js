@@ -25,6 +25,11 @@ function AdminHeader() {
     navigate("/full-buyers-list");
   };
 
+  const redirectToManageAdmin = (e) => {
+    e.preventDefault();
+    navigate("/manage-admin");
+  };
+
   return (
     <header className="fixed top-0 left-0 w-full z-50 bg-gradient-to-r from-indigo-500 via-sky-500 to-emerald-500 text-white shadow-md">
       <nav className="container mx-auto flex justify-around items-center px-4 py-3">
@@ -95,7 +100,10 @@ function AdminHeader() {
 
           {/* Manage Profile */}
           <li>
-            <button className="flex items-center space-x-1 px-3 py-2 rounded-md bg-gray-700 hover:bg-gray-600 transition-colors">
+            <button
+              className="flex items-center space-x-1 px-3 py-2 rounded-md bg-gray-700 hover:bg-gray-600 transition-colors"
+              onClick={redirectToManageAdmin}
+            >
               Manage Profile
             </button>
           </li>

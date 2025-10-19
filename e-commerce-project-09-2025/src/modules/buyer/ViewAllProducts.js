@@ -48,9 +48,7 @@ function ViewAllProducts() {
 
   return (
     <div className="p-6">
-      <h2 className="text-xl font-bold text-teal-700 mb-4">
-        All Latched Products
-      </h2>
+      <h2 className="text-xl font-bold text-teal-700 mb-4">All Products</h2>
 
       {/* Category Dropdown */}
       <div className="flex justify-center mb-8">

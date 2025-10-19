@@ -6,6 +6,7 @@ function SellerCreation() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
   const [selectedState, setSelectedState] = useState("");
   const [pin, setPin] = useState("");
@@ -22,6 +23,7 @@ function SellerCreation() {
       !name ||
       !email ||
       !password ||
+      !phone ||
       !address ||
       !pin ||
       !storeName ||
@@ -29,7 +31,7 @@ function SellerCreation() {
       !trademark
     ) {
       toast.warn(
-        "Please fill in the required fields: Name, Email, Password, Address, PIN, Store Name, GST No., Trademark"
+        "Please fill in the required fields: Name, Email, Password, Phone, Address, PIN, Store Name, GST No., Trademark"
       );
     }
 
@@ -37,6 +39,7 @@ function SellerCreation() {
       name,
       email,
       password,
+      phone,
       address,
       selectedState,
       pin,
@@ -115,6 +118,19 @@ function SellerCreation() {
               value={password}
               id="passwordInp"
               onChange={(e) => setPassword(e.target.value)}
+              className="w-full rounded-lg border-gray-300 shadow-sm focus:ring-2 focus:ring-green-400"
+            />
+          </div>
+
+          <div>
+            <label htmlFor="phone" className="block font-medium text-gray-700">
+              Phone:
+            </label>
+            <input
+              type="phone"
+              value={phone}
+              id="phoneInp"
+              onChange={(e) => setPhone(e.target.value)}
               className="w-full rounded-lg border-gray-300 shadow-sm focus:ring-2 focus:ring-green-400"
             />
           </div>

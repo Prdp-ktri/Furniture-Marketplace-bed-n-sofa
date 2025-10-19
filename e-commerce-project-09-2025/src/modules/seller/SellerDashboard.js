@@ -1,6 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Store, Mail, MapPin, BadgeInfo, Hash } from "lucide-react";
+import {
+  Store,
+  Mail,
+  MapPin,
+  BadgeInfo,
+  Hash,
+  Phone,
+  PinIcon,
+} from "lucide-react";
 
 function SellerDashboard() {
   const [seller, setSeller] = useState(null);
@@ -11,28 +19,27 @@ function SellerDashboard() {
 
   useEffect(() => {
     const storedSeller = JSON.parse(localStorage.getItem("loggedInSeller"));
+
     if (!storedSeller) {
       navigate("/sellerLogin");
-    } else {
-      setSeller(storedSeller);
-      setSellerState(storedSeller.selectedState || "");
-
-      // 🟩 Fetch latched products count
-      const storageKey = `latchedProducts_${storedSeller.email}`;
-      const storedLatched = JSON.parse(localStorage.getItem(storageKey)) || [];
-      setLatchedCount(storedLatched.length);
-
-      // 🟩 Fetch new orders count
-      const sellerOrders =
-        JSON.parse(localStorage.getItem("sellerOrders")) || {};
-      const myOrders = sellerOrders[storedSeller.storeName] || [];
-      setNewOrdersCount(myOrders.length);
+      return;
     }
+
+    setSeller(storedSeller);
+    setSellerState(storedSeller.selectedState || "");
+
+    // 🟩 Fetch latched products count
+    const storageKey = `latchedProducts_${storedSeller.email}`;
+    const storedLatched = JSON.parse(localStorage.getItem(storageKey)) || [];
+    setLatchedCount(storedLatched.length);
+
+    // 🟩 Fetch new orders count
+    const sellerOrders = JSON.parse(localStorage.getItem("sellerOrders")) || {};
+    const myOrders = sellerOrders[storedSeller.storeName] || [];
+    setNewOrdersCount(myOrders.length);
   }, [navigate]);
 
-  if (!seller) {
-    return <p>Loading seller details...</p>;
-  }
+  if (!seller) return <p>Loading seller details...</p>;
 
   // Navigation handlers
   const goToAllLatchableProducts = () => navigate("/allLatchableProducts");
@@ -42,7 +49,6 @@ function SellerDashboard() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-teal-50 to-yellow-50 pt-24 p-8">
-      {/* 🟢 Seller Info Header Card */}
       <div className="bg-gradient-to-r from-teal-600 to-teal-400 text-white rounded-2xl shadow-2xl p-8 mb-10">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
           <div>
@@ -63,6 +69,10 @@ function SellerDashboard() {
             <span>{seller.email}</span>
           </div>
           <div className="flex items-center gap-3 bg-white/10 p-3 rounded-lg">
+            <Phone size={20} />
+            <span>{seller.phone}</span>
+          </div>
+          <div className="flex items-center gap-3 bg-white/10 p-3 rounded-lg">
             <MapPin size={20} />
             <span>
               {seller.address}, {sellerState} - {seller.pin}
@@ -76,12 +86,15 @@ function SellerDashboard() {
             <Hash size={20} />
             <span>Trademark: {seller.trademark}</span>
           </div>
+          <div className="flex items-center gap-3 bg-white/10 p-3 rounded-lg">
+            <PinIcon size={20} />
+            <span>PIN Code: {seller.pin}</span>
+          </div>
         </div>
       </div>
 
-      {/* 🟩 Sneak Peek Cards Grid */}
+      {/* Sneak Peek Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-6">
-        {/* Card 1: Latched Products */}
         <div className="bg-white shadow-lg border-t-4 border-teal-500 rounded-2xl p-6 hover:shadow-2xl transition">
           <h2 className="text-xl font-semibold text-teal-700 mb-3">
             Latched Products
@@ -102,7 +115,6 @@ function SellerDashboard() {
           </button>
         </div>
 
-        {/* Card 2: New Orders */}
         <div className="bg-white shadow-lg border-t-4 border-orange-500 rounded-2xl p-6 hover:shadow-2xl transition">
           <h2 className="text-xl font-semibold text-orange-700 mb-3">
             New Orders
@@ -123,7 +135,6 @@ function SellerDashboard() {
           </button>
         </div>
 
-        {/* Card 3: Manage Profile */}
         <div className="bg-white shadow-lg border-t-4 border-blue-500 rounded-2xl p-6 hover:shadow-2xl transition">
           <h2 className="text-xl font-semibold text-blue-700 mb-3">
             Manage Profile
@@ -143,7 +154,7 @@ function SellerDashboard() {
         </div>
       </div>
 
-      {/* 🟨 Quick Access Buttons */}
+      {/* Quick Access Buttons */}
       <div className="mt-10">
         <h3 className="text-xl font-semibold text-gray-800 mb-4">
           Quick Access

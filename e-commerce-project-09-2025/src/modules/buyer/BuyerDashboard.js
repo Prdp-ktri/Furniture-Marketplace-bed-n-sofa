@@ -1,6 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ShoppingCart, Package, User, MapPin, Mail } from "lucide-react";
+import {
+  ShoppingCart,
+  Package,
+  User,
+  MapPin,
+  Mail,
+  PersonStanding,
+  Phone,
+  PersonStandingIcon,
+  Map,
+} from "lucide-react";
 
 function BuyerDashboard() {
   const navigate = useNavigate();
@@ -61,13 +71,15 @@ function BuyerDashboard() {
       </div>
 
       {/* 🟨 Buyer Info Card */}
-      <div className="bg-white shadow-md border-l-4 border-teal-500 rounded-2xl p-6 mb-10 max-w-3xl mx-auto">
+      <div className="bg-white shadow-md border-l-4 border-teal-500 rounded-2xl p-6 mb-10 max-w-8xl mx-auto">
         <h2 className="text-2xl font-semibold text-teal-700 mb-4 flex items-center gap-2">
           <User size={26} className="text-teal-600" /> Your Details
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-gray-700">
           <p>
-            <span className="font-semibold">Name:</span> {buyer.name || "—"}
+            <span>
+              <span className="font-semibold">Name:</span> {buyer.name || "—"}
+            </span>
           </p>
           <p>
             <span className="font-semibold">Age:</span> {buyer.age || "—"}
@@ -76,6 +88,12 @@ function BuyerDashboard() {
             <Mail size={18} className="text-gray-500" />
             <span>
               <span className="font-semibold">Email:</span> {buyer.email || "—"}
+            </span>
+          </p>
+          <p className="flex items-center gap-2">
+            <Phone size={18} className="text-gray-500" />
+            <span>
+              <span className="font-semibold">Phone:</span> {buyer.phone || "—"}
             </span>
           </p>
           <p className="flex items-center gap-2">

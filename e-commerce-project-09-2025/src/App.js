@@ -36,6 +36,7 @@ import ManageProfile from "./modules/seller/ManageProfile";
 import NewOrders from "./modules/seller/NewOrders";
 import AllSellersList from "./components/admin/AllSellersList";
 import AllBuyersList from "./components/admin/AllBuyersList";
+import ManageAdmin from "./components/admin/ManageAdmin";
 
 export const AdminLoginContext = createContext();
 export const BuyerLoginContext = createContext();
@@ -214,6 +215,14 @@ function App() {
                       element={
                         <Suspense fallback={<Loader />}>
                           <AllBuyersList />
+                        </Suspense>
+                      }
+                    />
+                    <Route
+                      path="/manage-admin"
+                      element={
+                        <Suspense fallback={<Loader />}>
+                          <ManageAdmin />
                         </Suspense>
                       }
                     />

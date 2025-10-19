@@ -6,6 +6,7 @@ function ManageProfile() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
   const [selectedState, setSelectedState] = useState("");
   const [pin, setPin] = useState("");
@@ -34,6 +35,7 @@ function ManageProfile() {
       .then((data) => {
         setName(data.name || "");
         setEmail(data.email || "");
+        setPhone(data.phone || "");
         setPassword(data.password || "");
         setAddress(data.address || "");
         setSelectedState(data.selectedState || "");
@@ -59,6 +61,7 @@ function ManageProfile() {
       id: storedSeller.id,
       name,
       email,
+      phone,
       password,
       address,
       selectedState,
@@ -117,6 +120,13 @@ function ManageProfile() {
                 placeholder="Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                className="p-3 border rounded-lg focus:ring-2 focus:ring-teal-400 focus:outline-none w-full"
+              />
+              <input
+                type="phone"
+                placeholder="phone"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
                 className="p-3 border rounded-lg focus:ring-2 focus:ring-teal-400 focus:outline-none w-full"
               />
               <input

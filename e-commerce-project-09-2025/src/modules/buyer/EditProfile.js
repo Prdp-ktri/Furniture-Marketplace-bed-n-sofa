@@ -7,6 +7,7 @@ function EditProfile() {
   const [name, setName] = useState("");
   const [age, setAge] = useState("");
   const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [address, setAddress] = useState("");
   const [selectedState, setSelectedState] = useState("");
@@ -34,6 +35,7 @@ function EditProfile() {
         setName(data.name || "");
         setAge(data.age || "");
         setEmail(data.email || "");
+        setPhone(data.phone || "");
         setPassword(data.password || "");
         setAddress(data.address || "");
         setSelectedState(data.selectedState || "");
@@ -49,6 +51,7 @@ function EditProfile() {
       name,
       age,
       email,
+      phone,
       password,
       address,
       selectedState,
@@ -74,7 +77,7 @@ function EditProfile() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-teal-50 to-yellow-50 flex items-center justify-center p-6">
-      <div className="bg-white shadow-2xl rounded-2xl p-8 max-w-2xl w-full border-t-4 border-teal-500">
+      <div className="bg-white shadow-2xl rounded-2xl p-8 max-w-6xl w-full border-t-4 border-teal-500">
         <h1 className="text-3xl font-bold text-teal-700 mb-6 text-center">
           Edit Your Profile
         </h1>
@@ -105,6 +108,13 @@ function EditProfile() {
                 placeholder="Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                className="p-3 border rounded-lg focus:ring-2 focus:ring-teal-400 focus:outline-none w-full"
+              />
+              <input
+                type="phone"
+                placeholder="phone"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
                 className="p-3 border rounded-lg focus:ring-2 focus:ring-teal-400 focus:outline-none w-full"
               />
               <input

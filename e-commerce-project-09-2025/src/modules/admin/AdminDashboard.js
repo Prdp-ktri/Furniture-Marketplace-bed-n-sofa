@@ -8,6 +8,13 @@ import {
   ArrowRight,
   Mail,
   Shield,
+  MapPin,
+  BadgeCheck,
+  BadgePercent,
+  Map,
+  Ship,
+  StoreIcon,
+  Phone,
 } from "lucide-react";
 
 function AdminDashboard() {
@@ -42,7 +49,7 @@ function AdminDashboard() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-teal-50 pt-28 p-8">
-      <div className="max-w-6xl mx-auto bg-white shadow-2xl rounded-3xl p-8">
+      <div className="max-w-8xl mx-auto bg-white shadow-2xl rounded-3xl p-8">
         {/* Header */}
         <h1 className="text-4xl font-extrabold text-teal-700 mb-6 text-center">
           🧭 Admin Dashboard
@@ -59,11 +66,48 @@ function AdminDashboard() {
           <div className="grid sm:grid-cols-2 gap-4 text-base">
             <p className="flex items-center gap-2">
               <Shield className="w-5 h-5 text-yellow-300" />{" "}
-              <strong>ID:</strong> {admin.id || "—"}
+              <strong>ID:</strong> {"46d6"}
+            </p>
+            <p className="flex items-center gap-2">
+              <StoreIcon className="w-5 h-5 text-yellow-300" />{" "}
+              <strong>Store:</strong> {"Finesse Furnishing"}
             </p>
             <p className="flex items-center gap-2">
               <Mail className="w-5 h-5 text-yellow-300" />{" "}
-              <strong>Email:</strong> {admin.email || "admin@example.com"}
+              <strong>Email:</strong> {"pradeepkhatri44@live.com"}
+            </p>
+            <p className="flex items-center gap-2">
+              <Phone className="w-5 h-5 text-yellow-300" />{" "}
+              <strong>Phone:</strong> {"+91-9828835749"}
+            </p>
+            <p className="flex items-center gap-2">
+              <MapPin className="w-5 h-5 text-yellow-300" />{" "}
+              <strong>Address:</strong>{" "}
+              {"31/50, Nayakbara, Ajmer-Pushkar Rd, Pushkar"}
+            </p>
+            <p className="flex items-center gap-2">
+              <Map className="w-5 h-5 text-yellow-300" />
+              <strong>State:</strong>
+              {"Rajasthan"}
+            </p>
+            <p className="flex items-center gap-2">
+              <BadgeCheck className="w-5 h-5 text-yellow-300" />
+              <strong>Trademark:</strong> {"FINESSE"}
+            </p>
+            <p className="flex items-center gap-2">
+              <BadgePercent className="w-5 h-5 text-yellow-300" />
+              <strong>GST No.:</strong>
+              {"08RICS7823V1FS"}
+            </p>
+            <p className="flex items-center gap-2">
+              <MapPin className="w-5 h-5 text-yellow-300" />
+              <strong>PIN:</strong>
+              {"305022"}
+            </p>
+            <p className="flex items-center gap-2">
+              <Ship className="w-5 h-5 text-yellow-300" />
+              <strong>IEC Code:</strong>
+              {"AI348160954"}
             </p>
           </div>
         </div>

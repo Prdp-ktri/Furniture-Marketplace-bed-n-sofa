@@ -25,6 +25,19 @@
       "storeName": "Pepperfry Furnishings",
       "gst": "09CJPL5827C3MX",
       "trademark": "452198639"
+    },
+    {
+      "id": "a0e9",
+      "name": "Neel Kamal",
+      "email": "neelkamal@live.com",
+      "password": "nk@seller",
+      "phone": "+91-7849935129",
+      "address": "B-209, Mall Road, Mussoorie",
+      "selectedState": "UK",
+      "pin": "248179",
+      "storeName": "Neelkamal Homes",
+      "gst": "06YHKP6913V7KL",
+      "trademark": "1146978912"
     }
   ]
 }

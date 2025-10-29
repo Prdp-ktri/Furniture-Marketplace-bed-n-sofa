@@ -10,6 +10,17 @@
       "selectedState": "GJ",
       "pin": "308001",
       "id": "9d19"
+    },
+    {
+      "name": "Hansa Deshmukh",
+      "age": "46",
+      "email": "hansadeshmukh@gmail.com",
+      "phone": "+91-8974567733",
+      "password": "HD@buyer",
+      "address": "C-109, Manvi Complex, Sirka Road, Anand",
+      "selectedState": "GJ",
+      "pin": "388001",
+      "id": "f46c"
     }
   ]
 }

@@ -68,7 +68,7 @@ function BuyerDashboard() {
             </p>
           </div>
         </div>
-      </div>
+      </div> 
 
       {/* 🟨 Buyer Info Card */}
       <div className="bg-white shadow-md border-l-4 border-teal-500 rounded-2xl p-6 mb-10 max-w-8xl mx-auto">

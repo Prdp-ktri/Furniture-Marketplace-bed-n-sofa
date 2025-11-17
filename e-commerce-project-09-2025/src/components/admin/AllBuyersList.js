@@ -19,7 +19,7 @@ function AllBuyersList() {
     if (!window.confirm("🗑️ Are you sure you want to delete this buyer?"))
       return;
 
-    fetch(`http://localhost:7000/buyers/${id}`, {
+    fetch(`http://localhost:5000/buyers/${id}`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
     })

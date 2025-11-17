@@ -133,7 +133,7 @@ export default function BuyerCreation() {
               Phone:
             </label>
             <input
-              type="number"
+              type="text"
               name="phone"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}

@@ -23,32 +23,23 @@
       "id": "f46c"
     },
     {
-      "name": "Aastha",
-      "age": "24",
-      "email": "aasthalodhi@gmail.com",
-      "phone": "+91-7748623769",
-      "password": "AL@buyer",
-      "address": "Jamnagar,",
-      "selectedState": "GJ",
-      "pin": "361001",
-      "id": "d714"
-    },
-    {
-      "id": "573b",
+      "id": "6fae",
       "name": "Deep Trivedi",
       "age": "27",
       "email": "deep@example.com",
+      "phone": "+91-7843691259",
       "password": "deep@buyer",
       "address": "Thaltej, Ahmedabad",
       "selectedState": "GJ",
-      "pin": "380052"
+      "pin": "380009"
     },
     {
-      "id": "d152",
+      "id": "3eb9",
       "name": "Maulik Patel",
       "age": "34",
-      "email": "maulik@example.com",
-      "password": "maulik@buyer",
+      "email": "maulik@buyer.com",
+      "phone": "+91-7826937496",
+      "password": "maulik@login",
       "address": "Ahmedabad",
       "selectedState": "GJ",
       "pin": "380009"

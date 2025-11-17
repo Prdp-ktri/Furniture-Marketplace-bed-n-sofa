@@ -6,9 +6,9 @@
       "email": "lokeshmodi@gmail.com",
       "phone": "+91-8643215697",
       "password": "LK@buyer",
-      "address": "Navrangpura, Ahmedabad",
-      "selectedState": "GJ",
-      "pin": "308001",
+      "address": "Navrangpura, Jaipur",
+      "selectedState": "Rajasthan",
+      "pin": "305022",
       "id": "9d19"
     },
     {
@@ -21,6 +21,37 @@
       "selectedState": "GJ",
       "pin": "388001",
       "id": "f46c"
+    },
+    {
+      "name": "Aastha",
+      "age": "24",
+      "email": "aasthalodhi@gmail.com",
+      "phone": "+91-7748623769",
+      "password": "AL@buyer",
+      "address": "Jamnagar,",
+      "selectedState": "GJ",
+      "pin": "361001",
+      "id": "d714"
+    },
+    {
+      "id": "573b",
+      "name": "Deep Trivedi",
+      "age": "27",
+      "email": "deep@example.com",
+      "password": "deep@buyer",
+      "address": "Thaltej, Ahmedabad",
+      "selectedState": "GJ",
+      "pin": "380052"
+    },
+    {
+      "id": "d152",
+      "name": "Maulik Patel",
+      "age": "34",
+      "email": "maulik@example.com",
+      "password": "maulik@buyer",
+      "address": "Ahmedabad",
+      "selectedState": "GJ",
+      "pin": "380009"
     }
   ]
 }

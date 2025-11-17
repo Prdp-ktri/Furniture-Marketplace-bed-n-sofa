@@ -8,6 +8,7 @@ export default function BuyerCreation() {
   const [name, setName] = useState("");
   const [age, setAge] = useState("");
   const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [address, setAddress] = useState("");
   const [selectedState, setSelectedState] = useState("");
@@ -27,6 +28,7 @@ export default function BuyerCreation() {
       name,
       age,
       email,
+      phone,
       password,
       address,
       selectedState,
@@ -120,6 +122,23 @@ export default function BuyerCreation() {
               onChange={(e) => setEmail(e.target.value)}
               className="mt-1 block w-full rounded-lg border border-yellow-200 px-3 py-2 placeholder-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-yellow-300"
               placeholder="you@example.com"
+            />
+          </div>
+
+          <div>
+            <label
+              htmlFor="phone"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Phone:
+            </label>
+            <input
+              type="number"
+              name="phone"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              className="mt-1 block w-full rounded-lg border border-yellow-200 px-3 py-2 placeholder-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-yellow-300"
+              placeholder="+91-xxxxxxxxxx"
             />
           </div>
 

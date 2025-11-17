@@ -1067,16 +1067,6 @@
       ],
       "productSize": "yoga",
       "mrp": "1999"
-    },
-    {
-      "brandName": "Jayesh",
-      "productCat": "Sofa",
-      "productName": "Sofa 5 Seating",
-      "productDesc": "Any details 5 seater sofa",
-      "productImgs": [],
-      "productSize": "sofa-sets",
-      "mrp": "69999",
-      "id": "5260"
     }
   ]
 }

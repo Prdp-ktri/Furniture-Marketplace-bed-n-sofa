@@ -50,18 +50,19 @@ function BuyerDashboard() {
   const goToEditProfile = () => navigate("/edit-profile");
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-yellow-50 to-teal-50 pt-24 p-8">
+    <div className="min-h-screen bg-gradient-to-br from-yellow-50 to-teal-50 pt-6 p-8">
       {/* 🟢 Welcome Header */}
+      <div>
+        <marquee behavior="" direction="left">
+          If you are buying products from our website for the first time, you
+          can buy it for the discount of ₹500 by applying the coupon on the
+          check-out page{" "}
+          <b>
+            <u>#FIRST500</u>
+          </b>
+        </marquee>
+      </div>
       <div className="bg-gradient-to-r from-orange-500 to-yellow-400 text-white rounded-2xl shadow-2xl p-8 mb-10">
-        <div>
-          <marquee behavior="" direction="left">
-            If you are buying products on our website for the first time, you
-            can buy it for the discount of ₹500 by applying the coupon{" "}
-            <b>
-              <u>#FIRST500</u>
-            </b>
-          </marquee>
-        </div>
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
           <div>
             <h1 className="text-3xl font-bold mb-2">

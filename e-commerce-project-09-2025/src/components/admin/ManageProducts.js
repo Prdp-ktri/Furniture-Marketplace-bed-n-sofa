@@ -32,7 +32,7 @@ function ManageProducts() {
       headers: { "Content-type": "application/json" },
     }).then((res) => {
       if (res) {
-        toast("Product Deleted...!");
+        toast.success("Product Deleted...!");
       }
     });
   };

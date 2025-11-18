@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Trash2, Store, Mail, BadgePercent, Phone } from "lucide-react"; // icons
+import { toast } from "react-toastify";
 
 function AllSellersList() {
   const [sellers, setSellers] = useState([]);
@@ -25,7 +26,7 @@ function AllSellersList() {
     })
       .then((res) => {
         if (res.ok) {
-          alert("✅ Seller deleted successfully!");
+          toast.success("✅ Seller deleted successfully!");
           setSellers((prev) => prev.filter((s) => s.id !== id));
         }
       })

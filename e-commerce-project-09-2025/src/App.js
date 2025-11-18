@@ -8,7 +8,7 @@ import {
 } from "react-router-dom";
 import { createContext, lazy, Suspense, useEffect, useState } from "react";
 import Loader from "./components/admin/Loader";
-import { ToastContainer } from "react-toastify";
+import { Slide, ToastContainer } from "react-toastify";
 // import Header from "./components/admin/AdminHeader";
 import BuyerCreation from "./modules/buyer/BuyerCreation";
 import SellerCreation from "./modules/seller/SellerCreation";
@@ -113,7 +113,8 @@ function App() {
     <div className="App">
       <ToastContainer
         position="top-center"
-        autoClose={3000}
+        transition={Slide}
+        autoClose={2000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick
@@ -121,7 +122,7 @@ function App() {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        theme="colored"
+        theme="light"
       />
 
       <BrowserRouter>

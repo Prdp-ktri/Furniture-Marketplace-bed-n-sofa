@@ -60,7 +60,7 @@ function EditProductDetails() {
       body: JSON.stringify(updatedObj),
     }).then((res) => {
       if (res) {
-        toast("Updated...!");
+        toast.success("Updated...!");
         navigate("/manageProducts");
       }
     });

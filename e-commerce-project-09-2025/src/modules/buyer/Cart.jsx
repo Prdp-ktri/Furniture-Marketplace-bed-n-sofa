@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 // Key for storing the cart in localStorage (must match the key used in ProductDetails)
 const CART_STORAGE_KEY = "buyerCartItems";
 
 function Cart() {
   const [cartItems, setCartItems] = useState([]);
+  const [couponCode, setCouponCode] = useState("");
+  const [discount, setDiscount] = useState(0);
   const Navigate = useNavigate();
 
   // Function to save the current cart state back to localStorage
@@ -78,7 +81,7 @@ function Cart() {
   // ✅ NEW: Redirection function
   const handleProceedToCheckout = () => {
     if (cartItems.length === 0) {
-      alert("Your cart is empty!");
+      toast.error("Your cart is empty!");
       return;
     }
     // Navigate to the Place Order component
@@ -90,6 +93,18 @@ function Cart() {
     (sum, item) => sum + parseInt(item.quantity || 0),
     0
   );
+
+  const applyCoupon = () => {
+    if (couponCode.trim().toUpperCase() === "#FIRST500") {
+      setDiscount(500);
+      toast.success("Coupon Applied, ₹500 discount added.");
+    } else {
+      setDiscount(0);
+      toast.warn("Invalid Coupon Code.");
+    }
+  };
+
+  const finalAmount = Math.max(totalCost - discount, 0);
 
   return (
     <div className="p-8 min-h-screen bg-gray-100">
@@ -194,12 +209,38 @@ function Cart() {
             </h2>
             <div className="flex justify-between text-gray-700 mb-2">
               <span>Total Items ({totalItems}):</span>
-              <span>₹{totalCost.toFixed(2)}</span>
+              <span>₹{totalCost.toFixed(2)}</span> <br />
             </div>
+            <div className="flex justify-between mt-1 items-center">
+              <span>Discount Coupon:</span>
+              <span className="flex gap-2">
+                <input
+                  type="text"
+                  value={couponCode}
+                  onChange={(e) => setCouponCode(e.target.value)}
+                  placeholder="Enter Coupon Code"
+                  id=""
+                  className="border px-2 py-1 rounded"
+                />
+                <button
+                  onClick={applyCoupon}
+                  className="bg-blue-400 text-white px-3 py-1 rounded hover:bg-blue-700"
+                >
+                  Apply
+                </button>
+              </span>
+            </div>
+
+            {discount > 0 && (
+              <div className="flex justify-between text-green-600 font-semibold mt-2">
+                <span>Discount Applied:</span>
+                <span>- ₹{discount}</span>
+              </div>
+            )}
 
             <div className="flex justify-between text-xl font-bold border-t pt-4 mt-4">
               <span>Order Total:</span>
-              <span className="text-orange-600">₹{totalCost.toFixed(2)}</span>
+              <span className="text-orange-600">₹{finalAmount.toFixed(2)}</span>
             </div>
             <button
               className="mt-6 w-full bg-green-600 text-white py-3 rounded-lg font-bold hover:bg-green-700 transition"

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Trash2, User, Mail, MapPin, Home, Phone } from "lucide-react";
+import { toast } from "react-toastify";
 
 function AllBuyersList() {
   const [buyers, setBuyers] = useState([]);
@@ -25,7 +26,7 @@ function AllBuyersList() {
     })
       .then((res) => {
         if (res.ok) {
-          alert("✅ Buyer deleted successfully!");
+          toast.success("✅ Buyer deleted successfully!");
           setBuyers((prev) => prev.filter((b) => b.id !== id)); // Update instantly
         }
       })

@@ -53,6 +53,15 @@ function BuyerDashboard() {
     <div className="min-h-screen bg-gradient-to-br from-yellow-50 to-teal-50 pt-24 p-8">
       {/* 🟢 Welcome Header */}
       <div className="bg-gradient-to-r from-orange-500 to-yellow-400 text-white rounded-2xl shadow-2xl p-8 mb-10">
+        <div>
+          <marquee behavior="" direction="left">
+            If you are buying products on our website for the first time, you
+            can buy it for the discount of ₹500 by applying the coupon{" "}
+            <b>
+              <u>#FIRST500</u>
+            </b>
+          </marquee>
+        </div>
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
           <div>
             <h1 className="text-3xl font-bold mb-2">
@@ -68,7 +77,7 @@ function BuyerDashboard() {
             </p>
           </div>
         </div>
-      </div> 
+      </div>
 
       {/* 🟨 Buyer Info Card */}
       <div className="bg-white shadow-md border-l-4 border-teal-500 rounded-2xl p-6 mb-10 max-w-8xl mx-auto">

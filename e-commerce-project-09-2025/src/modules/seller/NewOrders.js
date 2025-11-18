@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 function NewOrders() {
   const [orders, setOrders] = useState([]);
@@ -8,7 +9,7 @@ function NewOrders() {
     // ✅ Get logged-in seller info
     const loggedInSeller = JSON.parse(localStorage.getItem("loggedInSeller"));
     if (!loggedInSeller) {
-      alert("Please log in as a seller first!");
+      toast.error("Please log in as a seller first!");
       return;
     }
 

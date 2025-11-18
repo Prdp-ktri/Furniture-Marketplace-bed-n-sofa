@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const CART_STORAGE_KEY = "buyerCartItems";
 
@@ -103,7 +104,7 @@ function ProductDetails() {
 
     localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(updatedCart));
 
-    alert(
+    toast.success(
       `Added "${productInfo.productName}" from ${cartItem.storeName} to Cart!`
     );
   };

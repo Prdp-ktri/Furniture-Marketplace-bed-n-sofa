@@ -43,7 +43,7 @@ function AddProduct() {
       body: JSON.stringify(productObj),
     }).then((res) => {
       if (res) {
-        toast("Product Added for latching on Seller Portal");
+        toast.success("Product Added for latching on Seller Portal");
         navigate("/viewProducts");
       }
     });

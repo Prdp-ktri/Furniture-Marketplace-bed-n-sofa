@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function TrackYourOrder() {
   const { orderId } = useParams();
@@ -11,7 +12,7 @@ function TrackYourOrder() {
     const allOrders = JSON.parse(localStorage.getItem("buyerOrders")) || [];
     const foundOrder = allOrders.find((o) => o.orderId === orderId);
     if (!foundOrder) {
-      alert("Order not found!");
+      toast.warn("Order not found!");
       navigate("/");
       return;
     }

@@ -32,7 +32,7 @@ export default function BuyerLoginCredentials() {
       (v) => v.email === email && v.password === password
     );
     if (buyerUser) {
-      toast("Welcome to our Store");
+      toast.success("Welcome to our Store");
       setBuyerLogin(true);
       setAdminLogin(false);
       setSellerLogin(false);
@@ -40,7 +40,7 @@ export default function BuyerLoginCredentials() {
       localStorage.setItem("buyer", JSON.stringify(buyerUser));
       navigate("/buyerDashboard");
     } else {
-      toast("Invalid Buyer Login Credentials, Try Again!");
+      toast.error("Invalid Buyer Login Credentials, Try Again!");
     }
   };
 

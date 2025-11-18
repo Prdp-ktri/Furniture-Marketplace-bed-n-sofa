@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 // LocalStorage Keys
 const BUYER_PROFILE_KEY = "loggedInBuyer";
@@ -76,7 +77,7 @@ function PlaceOrder() {
     // ✅ 1. Get logged-in buyer info
     const loggedInBuyer = JSON.parse(localStorage.getItem(BUYER_PROFILE_KEY));
     if (!loggedInBuyer) {
-      alert("You must be logged in to place an order.");
+      toast.warn("You must be logged in to place an order.");
       navigate("/login");
       return;
     }
@@ -127,7 +128,7 @@ function PlaceOrder() {
     setTotalCost(cost);
 
     if (storedCart.length === 0) {
-      alert("Your cart is empty. Redirecting to home.");
+      toast.error("Your cart is empty. Redirecting to home.");
       navigate("/");
     }
   }, [navigate]);
@@ -157,7 +158,7 @@ function PlaceOrder() {
   // ✅ Handle placing the order
   const handlePlaceOrder = () => {
     if (!paymentMethod) {
-      alert("Please select a payment method.");
+      toast.warn("Please select a payment method.");
       return;
     }
 
@@ -239,7 +240,7 @@ function PlaceOrder() {
       localStorage.removeItem(CART_STORAGE_KEY);
       setIsProcessing(false);
 
-      alert(`Order placed successfully! Your Order ID: ${orderId}`);
+      toast.info(`Order placed successfully! Your Order ID: ${orderId}`);
       navigate(`/track-your-order/${orderId}`);
     }, 2000);
   };

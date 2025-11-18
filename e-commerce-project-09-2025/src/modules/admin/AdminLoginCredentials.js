@@ -32,14 +32,14 @@ function AdminLoginCredentials() {
     let adminUser = data.find((v) => v.email === email && v.pw === pw);
 
     if (adminUser) {
-      toast("Welcome to the Admin Dashboard!");
+      toast.success("Welcome to the Admin Dashboard!");
       setAdminLogin(true);
       setBuyerLogin(false);
       setSellerLogin(false);
       setLogin(true);
       navigate("/adminDashboard");
     } else {
-      toast("Invalid Admin Login Credentials, Enter Again");
+      toast.error("Invalid Admin Login Credentials, Enter Again");
     }
   };
 

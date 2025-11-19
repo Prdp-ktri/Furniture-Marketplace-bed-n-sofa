@@ -178,7 +178,7 @@ function AllLatchableProducts() {
           onLatch={handleLatch}
           onClose={() => setLatchProduct(null)}
         />
-      )}
+      )} 
     </div>
   );
 }

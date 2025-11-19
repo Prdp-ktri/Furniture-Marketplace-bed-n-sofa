@@ -11,6 +11,7 @@ import {
   PersonStandingIcon,
   Map,
 } from "lucide-react";
+import Marquee from "react-fast-marquee";
 
 function BuyerDashboard() {
   const navigate = useNavigate();
@@ -50,17 +51,30 @@ function BuyerDashboard() {
   const goToEditProfile = () => navigate("/edit-profile");
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-yellow-50 to-teal-50 pt-6 p-8">
+    <div className="min-h-screen bg-gradient-to-br from-yellow-50 to-teal-50 pt-6 p-12">
       {/* 🟢 Welcome Header */}
-      <div>
-        <marquee behavior="" direction="left">
+      <div
+        style={{
+          border: "2px solid #ccc",
+          padding: "10px",
+          marginBottom: "20px",
+        }}
+      >
+        <Marquee
+          speed={50}
+          pauseOnHover={true}
+          gradient={true}
+          gradientColor={[100, 100, 100]}
+          gradientWidth={100}
+          style={{ fontSize: "1.5rem", color: "#007bff" }}
+        >
           If you are buying products from our website for the first time, you
           can buy it for the discount of ₹500 by applying the coupon on the
-          check-out page{" "}
+          check-out page{"     "}
           <b>
             <u>#FIRST500</u>
           </b>
-        </marquee>
+        </Marquee>
       </div>
       <div className="bg-gradient-to-r from-orange-500 to-yellow-400 text-white rounded-2xl shadow-2xl p-8 mb-10">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
